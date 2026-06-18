@@ -1,0 +1,132 @@
+---
+import Base from "../layouts/Base.astro";
+import { business, branches } from "../data/site";
+import { divisions } from "../data/treatments";
+---
+<Base
+  title="Book a Free Consultation - Dermamedics Makati"
+  description="Book your free aesthetic-doctor consultation at Dermamedics. Message us on Messenger, call the main branch, or request a callback. Honest assessment, transparent pricing, no obligation."
+  path="/book-free-consultation"
+>
+  <section class="relative mesh-aubergine grain text-cream overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-32 pb-16 sm:pt-40 sm:pb-20">
+      <p class="eyebrow text-champagne-soft" data-reveal>Free consultation · No obligation</p>
+      <h1 class="mt-5 font-display font-bold leading-[1.04] text-balance text-[clamp(2.4rem,6vw,4.6rem)] max-w-3xl" data-reveal>
+        Book your free <span class="italic font-normal text-champagne-soft">aesthetic-doctor consultation.</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-cream/80 text-pretty" data-reveal>
+        Three ways to reach us. In the Philippines, Messenger is fastest - but pick whatever suits you. Whichever you choose, the assessment is free and the price comes first.
+      </p>
+    </div>
+    <div class="absolute -bottom-px left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[var(--color-cream)]"></div>
+  </section>
+
+  <!-- Channels -->
+  <section class="py-16 sm:py-20 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="grid md:grid-cols-3 gap-5" data-stagger>
+        <a href={business.messenger} target="_blank" rel="noopener" class="group rounded-3xl bg-[var(--color-aubergine)] text-cream p-7 hover:shadow-[var(--shadow-lift)] transition-all" data-tilt="3">
+          <span class="inline-flex w-12 h-12 rounded-full bg-white/10 items-center justify-center"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.4 2 2 6.2 2 11.7c0 3.1 1.4 5.9 3.7 7.7V23l3.4-1.9c.9.3 1.9.4 2.9.4 5.6 0 10-4.2 10-9.7S17.6 2 12 2zm1 13.1l-2.5-2.7-4.9 2.7L11 9.2l2.6 2.7 4.8-2.7L13 15.1z"/></svg></span>
+          <h2 class="mt-4 font-display text-2xl font-bold">Messenger</h2>
+          <p class="mt-2 text-sm text-cream/75">The fastest way to reach us - how most patients book. Replies during clinic hours.</p>
+          <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-champagne-soft">{business.messengerLabel} <span class="transition-transform group-hover:translate-x-1">→</span></span>
+        </a>
+        <a href={`tel:${business.phonePrimaryTel}`} class="group rounded-3xl bg-[var(--color-paper)] ring-line p-7 hover:shadow-[var(--shadow-lift)] transition-all" data-tilt="3">
+          <span class="inline-flex w-12 h-12 rounded-full bg-[var(--color-champagne)]/15 items-center justify-center text-[var(--color-champagne-deep)]"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11 11 0 0 0 3.5.56 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .56 3.5 1 1 0 0 1-.24 1z"/></svg></span>
+          <h2 class="mt-4 font-display text-2xl font-bold text-[var(--color-aubergine)]">Call us</h2>
+          <p class="mt-2 text-sm text-[var(--color-ink-soft)]">Main branch, {business.hoursShort}. Speak to the team directly.</p>
+          <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-champagne-deep)]">{business.phonePrimaryDisplay} <span class="transition-transform group-hover:translate-x-1">→</span></span>
+        </a>
+        <a href={business.instagram} target="_blank" rel="noopener" class="group rounded-3xl bg-[var(--color-paper)] ring-line p-7 hover:shadow-[var(--shadow-lift)] transition-all" data-tilt="3">
+          <span class="inline-flex w-12 h-12 rounded-full bg-[var(--color-champagne)]/15 items-center justify-center text-[var(--color-champagne-deep)]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></span>
+          <h2 class="mt-4 font-display text-2xl font-bold text-[var(--color-aubergine)]">Instagram DM</h2>
+          <p class="mt-2 text-sm text-[var(--color-ink-soft)]">Prefer Instagram? Message us there - we're happy to help.</p>
+          <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-champagne-deep)]">{business.instagramHandle} <span class="transition-transform group-hover:translate-x-1">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form -->
+  <section class="pb-20 sm:pb-28 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8">
+      <div class="rounded-[2rem] ring-line bg-[var(--color-paper)] p-7 sm:p-10">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>Or request a callback</p>
+        <h2 class="mt-3 font-display text-3xl font-bold text-[var(--color-aubergine)]" data-reveal>Send us your details</h2>
+        <p class="mt-2 text-[var(--color-ink-soft)] text-pretty" data-reveal>Fill this in and we'll get back to you to arrange your free consultation. We'll then prepare a Messenger message you can send in one tap.</p>
+
+        <form id="consult-form" class="mt-7 grid sm:grid-cols-2 gap-4">
+          <label class="block sm:col-span-1">
+            <span class="text-sm font-medium text-[var(--color-aubergine)]">Your name</span>
+            <input required name="name" type="text" class="mt-1.5 w-full rounded-xl ring-1 ring-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 focus:ring-[var(--color-champagne)] outline-none" />
+          </label>
+          <label class="block sm:col-span-1">
+            <span class="text-sm font-medium text-[var(--color-aubergine)]">Mobile number</span>
+            <input required name="phone" type="tel" placeholder="09xx xxx xxxx" class="mt-1.5 w-full rounded-xl ring-1 ring-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 focus:ring-[var(--color-champagne)] outline-none" />
+          </label>
+          <label class="block sm:col-span-1">
+            <span class="text-sm font-medium text-[var(--color-aubergine)]">Preferred branch</span>
+            <select name="branch" class="mt-1.5 w-full rounded-xl ring-1 ring-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 focus:ring-[var(--color-champagne)] outline-none">
+              {branches.map((b) => <option value={b.name}>{b.name}</option>)}
+              <option value="No preference">No preference</option>
+            </select>
+          </label>
+          <label class="block sm:col-span-1">
+            <span class="text-sm font-medium text-[var(--color-aubergine)]">Treatment of interest</span>
+            <select name="treatment" class="mt-1.5 w-full rounded-xl ring-1 ring-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 focus:ring-[var(--color-champagne)] outline-none">
+              <option value="Not sure yet">Not sure yet - advise me</option>
+              {divisions.map((d) => <option value={d.name}>{d.name}</option>)}
+            </select>
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="text-sm font-medium text-[var(--color-aubergine)]">Anything else? (optional)</span>
+            <textarea name="message" rows="3" class="mt-1.5 w-full rounded-xl ring-1 ring-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 focus:ring-[var(--color-champagne)] outline-none"></textarea>
+          </label>
+          <label class="flex items-start gap-2.5 sm:col-span-2 text-sm text-[var(--color-ink-soft)]">
+            <input required type="checkbox" name="consent" class="mt-1" />
+            <span>I consent to Dermamedics contacting me about my enquiry. I understand my data is handled under the Data Privacy Act of 2012 (RA 10173) - see the <a href="/privacy-policy" class="underline text-[var(--color-champagne-deep)]">Privacy Policy</a>.</span>
+          </label>
+          <div class="sm:col-span-2 flex flex-wrap gap-3 items-center">
+            <button type="submit" class="btn btn-primary">Prepare my Messenger message</button>
+            <a id="form-mailto" href={`mailto:${business.email}`} class="btn btn-ghost">Email instead</a>
+          </div>
+          <p id="form-status" class="sm:col-span-2 text-sm text-[var(--color-champagne-deep)] font-medium"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ messenger: business.messenger, email: business.email }}>
+    (function () {
+      var form = document.getElementById("consult-form");
+      var status = document.getElementById("form-status");
+      var mailto = document.getElementById("form-mailto");
+      if (!form) return;
+      function summary() {
+        var d = new FormData(form);
+        return "Free consultation request\n" +
+          "Name: " + (d.get("name") || "") + "\n" +
+          "Mobile: " + (d.get("phone") || "") + "\n" +
+          "Branch: " + (d.get("branch") || "") + "\n" +
+          "Treatment: " + (d.get("treatment") || "") + "\n" +
+          "Notes: " + (d.get("message") || "-");
+      }
+      form.addEventListener("input", function () {
+        mailto.href = "mailto:" + email + "?subject=" + encodeURIComponent("Free consultation request") + "&body=" + encodeURIComponent(summary());
+      });
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+        var text = summary();
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(function () {
+            status.textContent = "Your details are copied. Opening Messenger - just paste and send.";
+          }).catch(function () { status.textContent = "Opening Messenger - please share your details there."; });
+        } else {
+          status.textContent = "Opening Messenger - please share your details there.";
+        }
+        window.open(messenger, "_blank", "noopener");
+      });
+    })();
+  </script>
+</Base>

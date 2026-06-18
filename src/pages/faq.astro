@@ -1,0 +1,54 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import FaqAccordion from "../components/FaqAccordion.astro";
+import ClosingCTA from "../components/ClosingCTA.astro";
+import { faqs } from "../data/faqs";
+
+const groups = [
+  { key: "pricing", label: "Pricing & transparency" },
+  { key: "treatments", label: "Treatments & methodology" },
+  { key: "safety", label: "Safety & credentials" },
+  { key: "visit", label: "Your visit & booking" },
+] as const;
+
+// FAQ schema
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+<Base
+  title="FAQ - Dermamedics Makati"
+  description="Honest answers on pricing transparency, Korean-influenced methodology, treatment safety, doctor-led care and booking at Dermamedics, Centuria Medical Makati."
+  path="/faq"
+>
+  <PageHero
+    eyebrow="The honest answers"
+    title="Questions,"
+    titleAccent="answered straight."
+    lead="The things patients ask most - about price, safety, methodology and booking. If yours isn't here, message us; we'll answer plainly."
+  />
+
+  <section class="py-16 sm:py-24 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8 space-y-12">
+      {groups.map((g) => {
+        const items = faqs.filter((f) => f.group === g.key);
+        return (
+          <div data-reveal>
+            <h2 class="font-display text-2xl font-bold text-[var(--color-aubergine)] mb-5">{g.label}</h2>
+            <FaqAccordion items={items} />
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <set:html value={`<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`} />
+  <ClosingCTA />
+</Base>

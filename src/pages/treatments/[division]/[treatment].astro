@@ -1,0 +1,116 @@
+---
+import Base from "../../../layouts/Base.astro";
+import ClosingCTA from "../../../components/ClosingCTA.astro";
+import { divisions, peso } from "../../../data/treatments";
+import { business } from "../../../data/site";
+
+export function getStaticPaths() {
+  return divisions.flatMap((d) =>
+    d.treatments.map((t) => ({
+      params: { division: d.slug, treatment: t.slug },
+      props: { division: d, treatment: t },
+    }))
+  );
+}
+const { division, treatment } = Astro.props;
+const related = division.treatments.filter((t) => t.slug !== treatment.slug).slice(0, 3);
+const facts = [
+  { k: "Sessions", v: treatment.sessions },
+  { k: "Downtime", v: treatment.downtime },
+  { k: "Indicative price", v: treatment.priceFrom ? `from ${peso(treatment.priceFrom)}${treatment.priceNote ? ` (${treatment.priceNote})` : ""}` : "Confirmed at free consultation" },
+  { k: "Performed by", v: division.tag === "Doctor-led" ? "A doctor" : "Doctor-supervised" },
+];
+---
+<Base
+  title={`${treatment.name} - ${division.name} | Dermamedics Makati`}
+  description={`${treatment.summary} Doctor-led at Dermamedics, ${business.building}. Transparent pricing, free consultation.`}
+  path={`/treatments/${division.slug}/${treatment.slug}`}
+>
+  <!-- Hero -->
+  <section class="relative mesh-aubergine grain text-cream overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-32 pb-16 sm:pt-40 sm:pb-20">
+      <nav class="text-sm text-cream/60 mb-6" aria-label="Breadcrumb">
+        <a href="/treatments" class="hover:text-champagne">Treatments</a> <span class="text-champagne">›</span>
+        <a href={`/treatments/${division.slug}`} class="hover:text-champagne">{division.name}</a> <span class="text-champagne">›</span>
+        <span class="text-cream/90">{treatment.name}</span>
+      </nav>
+      <div class="grid lg:grid-cols-12 gap-10 items-end">
+        <div class="lg:col-span-8">
+          <p class="eyebrow text-champagne-soft" data-reveal>{treatment.korean ? "Korean technique" : division.name} · {treatment.tagline}</p>
+          <h1 class="mt-5 font-display font-bold leading-[1.04] text-balance text-[clamp(2.4rem,6vw,4.6rem)]" data-reveal>{treatment.name}</h1>
+          <p class="mt-6 max-w-2xl text-lg text-cream/80 text-pretty" data-reveal>{treatment.summary}</p>
+          <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+            <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-champagne">Ask about {treatment.name}</a>
+            <a href="/book-free-consultation" class="btn btn-ghost-light">Free consultation</a>
+          </div>
+        </div>
+        <div class="lg:col-span-4 self-stretch">
+          <span class="font-display text-[8rem] leading-none text-champagne/30 block text-right" aria-hidden="true">{division.glyph}</span>
+        </div>
+      </div>
+    </div>
+    <div class="absolute -bottom-px left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[var(--color-cream)]"></div>
+  </section>
+
+  <section class="py-16 sm:py-24 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-8">
+        <h2 class="font-display text-3xl font-bold text-[var(--color-aubergine)]" data-reveal>About the treatment</h2>
+        <p class="mt-5 text-lg text-[var(--color-ink-soft)] leading-relaxed text-pretty" data-reveal>{treatment.detail}</p>
+
+        <h3 class="mt-10 font-display text-2xl font-bold text-[var(--color-aubergine)]" data-reveal>Good for</h3>
+        <div class="mt-4 grid sm:grid-cols-2 gap-3" data-stagger>
+          {treatment.goodFor.map((g) => (
+            <div class="flex items-center gap-3 rounded-2xl bg-[var(--color-paper)] ring-line px-5 py-3.5">
+              <span class="text-[var(--color-champagne-deep)]">✓</span>
+              <span class="text-[var(--color-aubergine)] font-medium">{g}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-10 rounded-3xl mesh-aubergine grain text-cream p-7 relative overflow-hidden" data-reveal>
+          <div class="relative z-10">
+            <p class="eyebrow text-champagne-soft text-[0.62rem]">Honest expectations</p>
+            <p class="mt-2 text-cream/90 leading-relaxed">Every treatment starts with a doctor's assessment, and we set realistic expectations from the first visit. Individual results vary. We'll tell you the full cost - and whether this is genuinely the right treatment for you - before anything begins.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="lg:col-span-4">
+        <div class="sticky top-24 rounded-3xl bg-[var(--color-paper)] ring-line p-7 shadow-[var(--shadow-soft)]">
+          <p class="eyebrow text-[var(--color-champagne-deep)] text-[0.62rem]">At a glance</p>
+          <dl class="mt-4 divide-y divide-[var(--color-line)]">
+            {facts.map((f) => (
+              <div class="py-3.5 flex justify-between gap-4">
+                <dt class="text-sm text-[var(--color-ink-soft)] shrink-0">{f.k}</dt>
+                <dd class="text-sm font-semibold text-[var(--color-aubergine)] text-right">{f.v}</dd>
+              </div>
+            ))}
+          </dl>
+          <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-primary w-full mt-5 text-sm">Message us on Messenger</a>
+          <a href={`tel:${business.phonePrimaryTel}`} class="btn btn-ghost w-full mt-2.5 text-sm">Call {business.phonePrimaryDisplay}</a>
+          <p class="mt-4 text-xs text-[var(--color-ink-soft)] text-center">Indicative price only - your written quote is given free at consultation.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="pb-20 sm:pb-28 bg-[var(--color-cream)]">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <h2 class="font-display text-2xl font-bold text-[var(--color-aubergine)] mb-6" data-reveal>More in {division.name}</h2>
+        <div class="grid sm:grid-cols-3 gap-4" data-stagger>
+          {related.map((t) => (
+            <a href={`/treatments/${division.slug}/${t.slug}`} class="group rounded-3xl bg-[var(--color-paper)] ring-line p-6 hover:shadow-[var(--shadow-lift)] transition-all">
+              <span class="font-display text-2xl text-[var(--color-champagne)]">{division.glyph}</span>
+              <h3 class="mt-2 font-display text-lg font-bold text-[var(--color-aubergine)] group-hover:text-[var(--color-champagne-deep)] transition-colors">{t.name}</h3>
+              <p class="mt-1.5 text-sm text-[var(--color-ink-soft)] leading-snug">{t.tagline}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <ClosingCTA heading={`Book ${treatment.name} with a doctor`} sub="Start with a free aesthetic-doctor consultation. Honest assessment, tailored plan, transparent pricing - message us on Messenger or call the main branch." />
+</Base>

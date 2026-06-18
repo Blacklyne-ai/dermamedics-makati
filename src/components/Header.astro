@@ -1,0 +1,105 @@
+---
+import Wordmark from "./Wordmark.astro";
+import { business, nav } from "../data/site";
+---
+<header id="site-header" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+  <div class="glass border-b border-[var(--color-line)]/60">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="flex items-center justify-between" style="height:var(--header-h)">
+        <a href="/" class="shrink-0" aria-label="Dermamedics home">
+          <Wordmark />
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-7" aria-label="Primary">
+          {nav.map((item) => (
+            <div class="relative group">
+              <a
+                href={item.href}
+                class="link-underline text-[0.92rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-aubergine)] transition-colors py-2 inline-flex items-center gap-1"
+              >
+                {item.label}
+                {item.children && (
+                  <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" class="opacity-50 transition-transform group-hover:rotate-180"><path d="M1 3l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                )}
+              </a>
+              {item.children && (
+                <div class="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
+                  <div class="glass rounded-2xl p-2 w-64 shadow-[var(--shadow-lift)]">
+                    {item.children.map((c) => (
+                      <a href={c.href} class="block px-4 py-2.5 rounded-xl text-sm text-[var(--color-ink-soft)] hover:text-[var(--color-aubergine)] hover:bg-[var(--color-champagne)]/15 transition-colors">
+                        {c.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-3">
+          <a href={`tel:${business.phonePrimaryTel}`} class="text-sm font-semibold text-[var(--color-aubergine)] hover:text-[var(--color-champagne-deep)] transition-colors">
+            {business.phonePrimaryDisplay}
+          </a>
+          <a href="/book-free-consultation" class="btn btn-primary text-sm" data-magnetic="0.2">Free consultation</a>
+        </div>
+
+        <button id="menu-btn" class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full ring-line text-[var(--color-aubergine)]" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="lg:hidden fixed inset-0 z-[60] translate-x-full transition-transform duration-300 ease-out" aria-hidden="true">
+    <div class="absolute inset-0 mesh-aubergine grain"></div>
+    <div class="relative h-full overflow-y-auto px-6 py-5">
+      <div class="flex items-center justify-between mb-8" style="height:var(--header-h)">
+        <Wordmark light />
+        <button id="menu-close" class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/20 text-cream" aria-label="Close menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-1" aria-label="Mobile">
+        {nav.map((item) => (
+          <div class="py-1 border-b border-white/10">
+            <a href={item.href} class="block py-2.5 text-2xl font-display text-cream">{item.label}</a>
+            {item.children && (
+              <div class="flex flex-wrap gap-x-4 gap-y-1 pb-3">
+                {item.children.map((c) => (
+                  <a href={c.href} class="text-sm text-cream/70 py-1">{c.label}</a>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </nav>
+      <div class="mt-8 flex flex-col gap-3">
+        <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-champagne w-full">Message us on Messenger</a>
+        <a href={`tel:${business.phonePrimaryTel}`} class="btn btn-ghost-light w-full">Call {business.phonePrimaryDisplay}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var header = document.getElementById("site-header");
+    var onScroll = function () {
+      if (window.scrollY > 12) header.classList.add("shadow-[var(--shadow-soft)]");
+      else header.classList.remove("shadow-[var(--shadow-soft)]");
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    var menu = document.getElementById("mobile-menu");
+    var btn = document.getElementById("menu-btn");
+    var close = document.getElementById("menu-close");
+    function open() { menu.classList.remove("translate-x-full"); menu.setAttribute("aria-hidden", "false"); btn.setAttribute("aria-expanded", "true"); document.body.style.overflow = "hidden"; }
+    function shut() { menu.classList.add("translate-x-full"); menu.setAttribute("aria-hidden", "true"); btn.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
+    btn.addEventListener("click", open);
+    close.addEventListener("click", shut);
+    menu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", shut); });
+  })();
+</script>

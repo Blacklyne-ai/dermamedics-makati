@@ -1,0 +1,20 @@
+---
+interface Props {
+  light?: boolean;
+  withTagline?: boolean;
+  class?: string;
+}
+const { light = false, withTagline = true, class: cls = "" } = Astro.props;
+const ink = light ? "var(--color-cream)" : "var(--color-aubergine)";
+const sub = light ? "rgba(244,239,232,0.7)" : "var(--color-ink-soft)";
+---
+<span class={`inline-flex flex-col leading-none ${cls}`} aria-label="Dermamedics - Elevating Beauty Since 2010">
+  <span class="font-display font-bold tracking-tight" style={`font-size:1.45rem;color:${ink}`}>
+    <span style="color:var(--color-champagne-deep)">D</span>ermamedics
+  </span>
+  {withTagline && (
+    <span class="eyebrow" style={`font-size:0.5rem;letter-spacing:0.28em;margin-top:0.28rem;color:${sub}`}>
+      Elevating Beauty Since 2010
+    </span>
+  )}
+</span>

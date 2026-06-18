@@ -1,0 +1,42 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Testimonials from "../components/Testimonials.astro";
+import ClosingCTA from "../components/ClosingCTA.astro";
+import { socialProof } from "../data/reviews";
+import { business } from "../data/site";
+---
+<Base
+  title="Reviews - Dermamedics Makati"
+  description="4.3★ across 115 Google reviews and an 11,662-strong Facebook community. What patients say about doctor-led, Korean-influenced, transparently-priced care at Dermamedics."
+  path="/reviews"
+>
+  <PageHero
+    eyebrow="What patients say"
+    title="Fifteen years of"
+    titleAccent="word of mouth."
+    lead={`${socialProof.caption}. The numbers are verified; the loyalty - especially around Doc Jam - is the kind only time earns.`}
+  >
+    <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+      <a href={business.facebook} target="_blank" rel="noopener" class="btn btn-champagne">Read Facebook reviews</a>
+      <a href={business.instagram} target="_blank" rel="noopener" class="btn btn-ghost-light">{business.instagramHandle}</a>
+    </div>
+  </PageHero>
+
+  <Testimonials count={6} heading={false} />
+
+  <section class="pb-20 sm:pb-28 bg-[var(--color-paper)]">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8">
+      <div class="rounded-3xl bg-[var(--color-cream)] ring-line p-7 sm:p-8 text-center" data-reveal>
+        <p class="font-display text-2xl font-bold text-[var(--color-aubergine)]">Been treated by us?</p>
+        <p class="mt-2 text-[var(--color-ink-soft)] text-pretty">Your honest review helps the next patient choose with confidence. It means a lot - thank you.</p>
+        <div class="mt-5 flex flex-wrap justify-center gap-3">
+          <a href={business.facebook} target="_blank" rel="noopener" class="btn btn-primary text-sm">Leave a Facebook review</a>
+          <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-ghost text-sm">Message us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ClosingCTA />
+</Base>

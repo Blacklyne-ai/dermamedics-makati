@@ -1,0 +1,84 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Marquee from "../components/Marquee.astro";
+import ClosingCTA from "../components/ClosingCTA.astro";
+
+const methods = [
+  { t: "Korean fillers", d: "Cross-linked hyaluronic-acid gels from Korean makers - Neuramis (Medytox), Yvoire (LG Chem). Prized for soft, natural integration and, because they're HA-based, fully reversible if you ever change your mind.", slug: "/treatments/aesthetic-medicine/korean-fillers" },
+  { t: "Korean Mesolipo", d: "Injection lipolysis popularised in Korea: fat-dissolving compounds placed into small, stubborn pockets, cleared naturally over weeks. A refining tool - not a substitute for weight loss, and we say so.", slug: "/treatments/body-slimming/korean-mesolipo" },
+  { t: "Korean PDO threads", d: "Biodegradable polydioxanone threads that reposition mild sagging and seed your own collagen. The threads dissolve in about six months; the collagen scaffold they leave behind sustains the lift.", slug: "/treatments/anti-ageing/pdo-thread-lift" },
+  { t: "Ultraformer HIFU", d: "Korean-engineered focused ultrasound (Classys) that lifts and tightens at the depth a surgeon works - without surgery or downtime. Known for comfort and precision.", slug: "/treatments/anti-ageing/hifu-face" },
+  { t: "Skin boosters & the 'Korean glow'", d: "Micro-injections of hydrating and regenerative agents for radiance and texture rather than volume - run as a short, spaced course for a cumulative, lit-from-within result.", slug: "/treatments/anti-ageing/mesotherapy" },
+];
+
+const principles = [
+  { t: "Lighter doses", d: "Less product, placed precisely - the result reads as you, rested, not as 'work done'." },
+  { t: "More layers", d: "Multiple gentle treatments combined and built over time, rather than one aggressive intervention." },
+  { t: "Natural over dramatic", d: "The goal is subtlety. We'd rather you came back for a top-up than left overfilled." },
+  { t: "Skin health first", d: "Glow comes from healthy skin - hydration, texture and tone underpin everything before volume is even discussed." },
+];
+---
+<Base
+  title="The Korean Influence - Dermamedics Makati"
+  description="Why 'Korean-influenced' is a method, not a buzzword: Korean fillers, Mesolipo, PDO threads, Ultraformer HIFU and the principles behind the natural Korean glow at Dermamedics."
+  path="/korean-influence"
+>
+  <PageHero
+    eyebrow="A method, not a buzzword"
+    title="What 'Korean-influenced'"
+    titleAccent="actually means."
+    lead="In Manila, 'Korean' gets stamped on everything. Here it means something specific - the products we use, the techniques we follow, and a philosophy of restraint that prizes the natural over the dramatic."
+  />
+
+  <section class="py-16 sm:py-24 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8">
+      <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>The philosophy</p>
+      <h2 class="mt-4 font-display font-bold leading-[1.06] text-[clamp(1.9rem,4vw,3rem)] text-[var(--color-aubergine)]" data-reveal>
+        Korean aesthetics is built on <span class="italic font-normal">restraint.</span>
+      </h2>
+      <p class="mt-6 text-lg text-[var(--color-ink-soft)] leading-relaxed text-pretty" data-reveal>
+        The Western default has often been one big intervention. The Korean approach is the opposite: lighter doses applied in more layers, combining several gentle treatments and building results over time. It's why Korean work tends to look natural - and it's the approach our doctors have followed for years.
+      </p>
+    </div>
+
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 mt-12">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" data-stagger>
+        {principles.map((p, i) => (
+          <div class="rounded-3xl bg-[var(--color-paper)] ring-line p-6 hover:shadow-[var(--shadow-lift)] transition-all" data-tilt="2">
+            <span class="font-display text-2xl font-bold text-[var(--color-champagne)]">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="mt-2 font-display text-lg font-bold text-[var(--color-aubergine)]">{p.t}</h3>
+            <p class="mt-2 text-sm text-[var(--color-ink-soft)] leading-snug">{p.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Marquee items={["Korean fillers", "Korean Mesolipo", "Korean PDO threads", "Ultraformer HIFU", "Skin boosters", "The Korean glow"]} dark />
+
+  <section class="py-20 sm:py-28 bg-[var(--color-paper)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl mb-12">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>The techniques</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>The Korean toolkit, explained.</h2>
+      </div>
+      <div class="space-y-4" data-stagger>
+        {methods.map((m, i) => (
+          <a href={m.slug} class="group grid sm:grid-cols-12 gap-4 sm:gap-8 items-center rounded-3xl bg-[var(--color-cream)] ring-line p-7 hover:shadow-[var(--shadow-lift)] transition-all">
+            <div class="sm:col-span-1 font-display text-3xl font-bold text-[var(--color-champagne)]">{String(i + 1).padStart(2, "0")}</div>
+            <div class="sm:col-span-3">
+              <h3 class="font-display text-2xl font-bold text-[var(--color-aubergine)] group-hover:text-[var(--color-champagne-deep)] transition-colors">{m.t}</h3>
+            </div>
+            <div class="sm:col-span-7">
+              <p class="text-[var(--color-ink-soft)] leading-relaxed text-pretty">{m.d}</p>
+            </div>
+            <div class="sm:col-span-1 text-right text-[var(--color-champagne-deep)] text-xl transition-transform group-hover:translate-x-1">→</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ClosingCTA heading="Curious which Korean treatment suits you?" sub="Take the Treatment Discovery Quiz or book a free consultation. We'll match the method to your skin - honestly, and with the price up front." />
+</Base>

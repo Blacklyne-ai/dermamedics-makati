@@ -1,0 +1,54 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import Marquee from "../../components/Marquee.astro";
+import ClosingCTA from "../../components/ClosingCTA.astro";
+import { divisions } from "../../data/treatments";
+const total = divisions.reduce((n, d) => n + d.treatments.length, 0);
+---
+<Base
+  title="Treatments - Dermamedics Makati"
+  description="The full Dermamedics treatment menu: aesthetic medicine, body slimming, anti-ageing, skin brightening, acne, IV drips, lasers and tattoo removal. Doctor-led, Korean-influenced, transparently priced."
+  path="/treatments"
+>
+  <PageHero
+    eyebrow="Eight divisions · One menu"
+    title="Every treatment we offer,"
+    titleAccent="clearly mapped."
+    lead={`From Korean fillers to NAD+ drips - ${total} doctor-led and Korean-influenced treatments across eight divisions. Browse by what you'd like to work on.`}
+  />
+
+  <section class="py-16 sm:py-24 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 space-y-6" data-stagger>
+      {divisions.map((d) => (
+        <div class="rounded-[2rem] ring-line bg-[var(--color-paper)] overflow-hidden hover:shadow-[var(--shadow-lift)] transition-all">
+          <div class="grid lg:grid-cols-12">
+            <a href={`/treatments/${d.slug}`} class="lg:col-span-4 group relative mesh-aubergine grain text-cream p-8 flex flex-col justify-between min-h-[200px]">
+              <div class="relative z-10 flex items-start justify-between">
+                <span class="eyebrow text-champagne-soft text-[0.62rem]">{d.number} · {d.tag}</span>
+                <span class="font-display text-4xl text-champagne">{d.glyph}</span>
+              </div>
+              <div class="relative z-10">
+                <h2 class="font-display text-3xl font-bold">{d.name}</h2>
+                <span class="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-champagne-soft">Explore division <span class="transition-transform group-hover:translate-x-1">→</span></span>
+              </div>
+            </a>
+            <div class="lg:col-span-8 p-8">
+              <p class="text-[var(--color-ink-soft)] text-pretty">{d.intro}</p>
+              <div class="mt-5 flex flex-wrap gap-2">
+                {d.treatments.map((t) => (
+                  <a href={`/treatments/${d.slug}/${t.slug}`} class="text-sm rounded-full ring-1 ring-[var(--color-line)] hover:ring-[var(--color-champagne)] hover:bg-[var(--color-champagne)]/10 px-3.5 py-1.5 text-[var(--color-aubergine)] transition-all">
+                    {t.korean ? "◆ " : ""}{t.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <Marquee />
+  <ClosingCTA heading="Not sure which treatment is right?" sub="Take the 90-second Treatment Discovery Quiz, or book a free aesthetic-doctor consultation. We'll match you honestly - and tell you the price first." />
+</Base>

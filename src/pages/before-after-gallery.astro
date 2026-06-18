@@ -1,0 +1,20 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import BeforeAfterGallery from "../components/BeforeAfterGallery.astro";
+import ClosingCTA from "../components/ClosingCTA.astro";
+---
+<Base
+  title="Results Gallery - Dermamedics Makati"
+  description="Before & after results across our treatment divisions, honestly framed. Individual results vary; every photo is shared with explicit patient consent. Filter by treatment."
+  path="/before-after-gallery"
+>
+  <PageHero
+    eyebrow="Real results · Filterable"
+    title="Before & after,"
+    titleAccent="honestly framed."
+    lead="Filter by what you're considering. Individual results vary - and every photo we publish is shared with explicit patient consent. No retouched miracles, no borrowed stock."
+  />
+  <BeforeAfterGallery heading={false} />
+  <ClosingCTA heading="Want to know what's realistic for you?" sub="Book a free consultation. A doctor will assess your skin and set honest expectations - and show you the price before anything begins." />
+</Base>

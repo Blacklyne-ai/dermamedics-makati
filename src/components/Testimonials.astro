@@ -1,0 +1,47 @@
+---
+import { reviews, socialProof } from "../data/reviews";
+interface Props { count?: number; heading?: boolean; }
+const { count = 6, heading = true } = Astro.props;
+const shown = reviews.slice(0, count);
+---
+<section class="py-20 sm:py-28 bg-[var(--color-paper)]">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    {heading && (
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+        <div class="max-w-2xl">
+          <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>What patients say</p>
+          <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>
+            Fifteen years of <span class="italic font-normal">word of mouth.</span>
+          </h2>
+        </div>
+        <div class="flex items-center gap-6 shrink-0" data-reveal>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-display text-4xl font-bold text-[var(--color-aubergine)]">{socialProof.googleRating}</span>
+              <span class="text-[var(--color-champagne)] text-xl" aria-hidden="true">★★★★★</span>
+            </div>
+            <p class="text-xs text-[var(--color-ink-soft)] mt-1">{socialProof.googleReviewCount} Google reviews</p>
+          </div>
+          <div class="h-12 w-px bg-[var(--color-line)]"></div>
+          <div>
+            <span class="font-display text-4xl font-bold text-[var(--color-aubergine)]">{socialProof.facebookCommunity}</span>
+            <p class="text-xs text-[var(--color-ink-soft)] mt-1">Facebook community</p>
+          </div>
+        </div>
+      </div>
+    )}
+
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-5 [&>*]:mb-5" data-stagger>
+      {shown.map((r) => (
+        <figure class="break-inside-avoid rounded-3xl bg-[var(--color-cream)] ring-line p-6 shadow-[var(--shadow-soft)]">
+          <span class="font-display text-5xl leading-none text-[var(--color-champagne)]" aria-hidden="true">"</span>
+          <blockquote class="mt-2 text-[var(--color-ink)] leading-relaxed text-pretty">{r.quote}</blockquote>
+          <figcaption class="mt-4 text-sm font-semibold text-[var(--color-aubergine)]">{r.attribution}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="mt-8 text-xs text-[var(--color-ink-soft)] max-w-2xl">
+      The {socialProof.googleRating}★ rating and follower numbers are verified aggregates. Individual quotes shown here are representative of recurring patient themes and will be replaced with real, consented reviews.
+    </p>
+  </div>
+</section>

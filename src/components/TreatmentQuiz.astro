@@ -1,0 +1,297 @@
+---
+import { divisions, concernLabels, type Concern } from "../data/treatments";
+import { business } from "../data/site";
+
+interface Props {
+  variant?: "section" | "page";
+}
+const { variant = "section" } = Astro.props;
+
+// Compact dataset for the client island
+const quizData = divisions.flatMap((d) =>
+  d.treatments.map((t) => ({
+    name: t.name,
+    slug: t.slug,
+    division: d.name,
+    divisionSlug: d.slug,
+    glyph: d.glyph,
+    korean: !!t.korean,
+    summary: t.summary,
+    priceFrom: t.priceFrom ?? null,
+    priceNote: t.priceNote ?? null,
+    sessions: t.sessions,
+    concerns: t.concerns,
+  }))
+);
+
+const concerns = (Object.keys(concernLabels) as Concern[]).map((k) => ({ key: k, label: concernLabels[k] }));
+const messenger = business.messenger;
+const phoneTel = business.phonePrimaryTel;
+const phoneDisplay = business.phonePrimaryDisplay;
+---
+<section id="quiz" class={variant === "section" ? "py-20 sm:py-28 bg-[var(--color-paper)] relative overflow-hidden" : "relative"}>
+  {variant === "section" && (
+    <div class="absolute top-1/2 -translate-y-1/2 right-[-10%] section-num text-[28rem] hidden xl:block select-none" aria-hidden="true">?</div>
+  )}
+  <div class="relative z-10 mx-auto max-w-4xl px-5 sm:px-8">
+    {variant === "section" && (
+      <div class="text-center mb-10">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>Free personalised plan · 90 seconds</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>
+          Tell us your concern. <span class="italic font-normal">Get a plan and a price.</span>
+        </h2>
+        <p class="mt-5 mx-auto max-w-xl text-[var(--color-ink-soft)] text-pretty" data-reveal>
+          No hidden fees, no pressure. Answer five quick questions and we'll match you to the right treatments with indicative pricing - confirmed at your free consultation.
+        </p>
+      </div>
+    )}
+
+    <div class="rounded-3xl bg-[var(--color-cream)] ring-line shadow-[var(--shadow-lift)] overflow-hidden" data-reveal="scale">
+      <!-- progress -->
+      <div class="px-6 sm:px-9 pt-6">
+        <div class="flex items-center justify-between text-xs text-[var(--color-ink-soft)] mb-2">
+          <span id="q-step-label">Step 1 of 5</span>
+          <button id="q-restart" class="hidden link-underline text-[var(--color-champagne-deep)] font-semibold">Start over</button>
+        </div>
+        <div class="h-1.5 rounded-full bg-[var(--color-cream-deep)] overflow-hidden">
+          <div id="q-progress" class="h-full bg-[var(--color-champagne)] transition-all duration-500" style="width:20%"></div>
+        </div>
+      </div>
+
+      <div id="q-body" class="px-6 sm:px-9 py-8 min-h-[340px]"></div>
+
+      <div class="px-6 sm:px-9 py-5 border-t border-[var(--color-line)] flex items-center justify-between bg-[var(--color-paper)]">
+        <button id="q-back" class="btn btn-ghost text-sm py-2.5 px-5 invisible">Back</button>
+        <button id="q-next" class="btn btn-primary text-sm py-2.5 px-6" disabled>Continue</button>
+      </div>
+    </div>
+    <p class="mt-4 text-center text-xs text-[var(--color-ink-soft)]">Indicative ranges only - your exact, written quote is given free at consultation. We never put you on the table without showing the price first.</p>
+  </div>
+
+  <script type="application/json" id="q-data" set:html={JSON.stringify({
+    treatments: quizData,
+    concerns,
+    messenger, phoneTel, phoneDisplay,
+  })}></script>
+
+  <script is:inline>
+  (function () {
+    var el = document.getElementById("q-data");
+    if (!el) return;
+    var DATA = JSON.parse(el.textContent);
+    var peso = function (n) { return "₱" + Number(n).toLocaleString("en-PH"); };
+
+    var ages = ["18–25", "26–35", "36–45", "46–55", "55+"];
+    var budgets = [
+      { key: "a", label: "₱5,000 – ₱15,000", min: 5000, max: 15000 },
+      { key: "b", label: "₱15,000 – ₱30,000", min: 15000, max: 30000 },
+      { key: "c", label: "₱30,000 – ₱50,000", min: 30000, max: 50000 },
+      { key: "d", label: "₱50,000+", min: 50000, max: 999999 },
+    ];
+    var timelines = ["A one-off treatment", "A 3-month package", "A 6-month package", "A long-term plan"];
+    var prefs = [
+      "Doctor-only procedures",
+      "Doctor or nurse (lower cost)",
+      "Aesthetician-led facials",
+      "Not sure - advise me",
+    ];
+
+    var KEY = "dm-quiz";
+    var state = { concern: null, age: null, budget: null, timeline: null, pref: null, step: 0 };
+    try { var saved = localStorage.getItem(KEY); if (saved) { var s = JSON.parse(saved); if (s && s.concern) state = Object.assign(state, s); } } catch (e) {}
+
+    var body = document.getElementById("q-body");
+    var progress = document.getElementById("q-progress");
+    var stepLabel = document.getElementById("q-step-label");
+    var nextBtn = document.getElementById("q-next");
+    var backBtn = document.getElementById("q-back");
+    var restartBtn = document.getElementById("q-restart");
+
+    var steps = ["concern", "age", "budget", "timeline", "pref"];
+
+    function persist() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+    function optionList(name, items, current) {
+      return '<div class="grid sm:grid-cols-2 gap-3" role="radiogroup" aria-label="' + name + '">' +
+        items.map(function (it) {
+          var val = typeof it === "string" ? it : it.label;
+          var selected = current === val;
+          return '<button type="button" role="radio" aria-checked="' + selected + '" data-val="' + val.replace(/"/g, "&quot;") + '" ' +
+            'class="q-opt text-left rounded-2xl px-5 py-4 ring-1 transition-all ' +
+            (selected ? "ring-[var(--color-aubergine)] bg-[var(--color-champagne)]/15" : "ring-[var(--color-line)] hover:ring-[var(--color-champagne)] bg-[var(--color-paper)]") + '">' +
+            '<span class="block font-semibold text-[var(--color-aubergine)]">' + val + '</span>' +
+            '</button>';
+        }).join("") + "</div>";
+    }
+
+    function renderStep() {
+      restartBtn.classList.toggle("hidden", state.step === 0 && !state.concern);
+      var k = steps[state.step];
+      var html = "";
+      if (k === "concern") {
+        html = '<p class="eyebrow text-[var(--color-champagne-deep)]">Your main concern</p><h3 class="mt-3 mb-6 font-display text-2xl sm:text-3xl font-bold text-[var(--color-aubergine)]">What would you most like to work on?</h3>' +
+          optionList("concern", DATA.concerns.map(function (c) { return c.label; }), labelFor(state.concern));
+      } else if (k === "age") {
+        html = '<p class="eyebrow text-[var(--color-champagne-deep)]">A little about you</p><h3 class="mt-3 mb-6 font-display text-2xl sm:text-3xl font-bold text-[var(--color-aubergine)]">Which age range are you in?</h3>' +
+          optionList("age", ages, state.age);
+      } else if (k === "budget") {
+        html = '<p class="eyebrow text-[var(--color-champagne-deep)]">Comfortable budget</p><h3 class="mt-3 mb-6 font-display text-2xl sm:text-3xl font-bold text-[var(--color-aubergine)]">Roughly what are you planning to invest?</h3>' +
+          optionList("budget", budgets.map(function (b) { return b.label; }), state.budget) +
+          '<p class="mt-4 text-xs text-[var(--color-ink-soft)]">This just helps us match honestly - never to upsell.</p>';
+      } else if (k === "timeline") {
+        html = '<p class="eyebrow text-[var(--color-champagne-deep)]">How you like to work</p><h3 class="mt-3 mb-6 font-display text-2xl sm:text-3xl font-bold text-[var(--color-aubergine)]">One visit, or a planned course?</h3>' +
+          optionList("timeline", timelines, state.timeline);
+      } else if (k === "pref") {
+        html = '<p class="eyebrow text-[var(--color-champagne-deep)]">Final question</p><h3 class="mt-3 mb-6 font-display text-2xl sm:text-3xl font-bold text-[var(--color-aubergine)]">Who would you prefer to see?</h3>' +
+          optionList("pref", prefs, state.pref);
+      }
+      body.innerHTML = html;
+      bindOpts();
+      stepLabel.textContent = "Step " + (state.step + 1) + " of 5";
+      progress.style.width = ((state.step + 1) / 5 * 100) + "%";
+      backBtn.classList.toggle("invisible", state.step === 0);
+      nextBtn.textContent = state.step === 4 ? "See my plan" : "Continue";
+      nextBtn.disabled = !currentAnswered();
+    }
+
+    function labelFor(v) { return v; }
+    function currentAnswered() {
+      var k = steps[state.step];
+      return !!state[k === "concern" ? "concern" : k];
+    }
+
+    function bindOpts() {
+      var opts = body.querySelectorAll(".q-opt");
+      opts.forEach(function (o) {
+        o.addEventListener("click", function () {
+          var val = o.getAttribute("data-val");
+          var k = steps[state.step];
+          state[k] = val;
+          persist();
+          opts.forEach(function (x) {
+            x.setAttribute("aria-checked", "false");
+            x.className = "q-opt text-left rounded-2xl px-5 py-4 ring-1 transition-all ring-[var(--color-line)] hover:ring-[var(--color-champagne)] bg-[var(--color-paper)]";
+          });
+          o.setAttribute("aria-checked", "true");
+          o.className = "q-opt text-left rounded-2xl px-5 py-4 ring-1 transition-all ring-[var(--color-aubergine)] bg-[var(--color-champagne)]/15";
+          nextBtn.disabled = false;
+        });
+      });
+    }
+
+    function matchConcernKey() {
+      var found = DATA.concerns.filter(function (c) { return c.label === state.concern; })[0];
+      return found ? found.key : null;
+    }
+
+    function recommend() {
+      var ck = matchConcernKey();
+      var budget = budgets.filter(function (b) { return b.label === state.budget; })[0];
+      var list = DATA.treatments.filter(function (t) { return t.concerns.indexOf(ck) !== -1; });
+      // sort: korean first, then those with an indicative price within budget, then rest
+      list.sort(function (a, b) {
+        var aw = (a.korean ? 2 : 0) + (a.priceFrom && budget && a.priceFrom <= budget.max ? 1 : 0);
+        var bw = (b.korean ? 2 : 0) + (b.priceFrom && budget && b.priceFrom <= budget.max ? 1 : 0);
+        return bw - aw;
+      });
+      return list.slice(0, 4);
+    }
+
+    function renderResult() {
+      restartBtn.classList.remove("hidden");
+      stepLabel.textContent = "Your personalised plan";
+      progress.style.width = "100%";
+      backBtn.classList.remove("invisible");
+      nextBtn.classList.add("hidden");
+
+      var recs = recommend();
+      var concernLabel = state.concern;
+
+      var planText = encodeURIComponent(
+        "Hi Dermamedics! I did the Treatment Discovery Quiz. Concern: " + concernLabel +
+        ". Age: " + state.age + ". Budget: " + state.budget + ". Timeline: " + state.timeline +
+        ". Preference: " + state.pref + ". I'd like a free consultation about: " +
+        recs.map(function (r) { return r.name; }).join(", ") + "."
+      );
+
+      var cards = recs.map(function (r) {
+        var price = r.priceFrom ? '<span class="text-[var(--color-champagne-deep)] font-semibold whitespace-nowrap">from ' + peso(r.priceFrom) + (r.priceNote ? ' <span class="font-normal text-[var(--color-ink-soft)]">(' + r.priceNote + ')</span>' : '') + '</span>' : '<span class="text-[var(--color-ink-soft)]">Priced at consultation</span>';
+        return '<a href="/treatments/' + r.divisionSlug + '/' + r.slug + '" class="group block rounded-2xl bg-[var(--color-paper)] ring-1 ring-[var(--color-line)] hover:ring-[var(--color-champagne)] p-5 transition-all">' +
+          '<div class="flex items-start justify-between gap-3">' +
+            '<div><span class="text-xs eyebrow text-[var(--color-champagne-deep)]">' + r.division + (r.korean ? ' · Korean' : '') + '</span>' +
+            '<p class="mt-1 font-display text-lg font-bold text-[var(--color-aubergine)] group-hover:text-[var(--color-champagne-deep)] transition-colors">' + r.name + '</p></div>' +
+            '<span class="font-display text-2xl text-[var(--color-champagne)]">' + r.glyph + '</span>' +
+          '</div>' +
+          '<p class="mt-2 text-sm text-[var(--color-ink-soft)] leading-snug">' + r.summary + '</p>' +
+          '<div class="mt-3 flex items-center justify-between text-sm"><span class="text-[var(--color-ink-soft)]">' + r.sessions + '</span>' + price + '</div>' +
+        '</a>';
+      }).join("");
+
+      body.innerHTML =
+        '<div>' +
+          '<p class="eyebrow text-[var(--color-champagne-deep)]">Based on your answers</p>' +
+          '<h3 class="mt-3 font-display text-2xl sm:text-3xl font-bold text-[var(--color-aubergine)]">For ' + concernLabel.toLowerCase() + ', start here.</h3>' +
+          '<p class="mt-3 text-sm text-[var(--color-ink-soft)] max-w-xl">These are doctor-led options that fit your concern and budget band (' + (state.budget || "any") + '). The exact plan and written pricing are confirmed free, in person - no obligation.</p>' +
+          '<div class="mt-6 grid sm:grid-cols-2 gap-3">' + cards + '</div>' +
+          '<div class="mt-7 rounded-2xl mesh-aubergine grain text-cream p-6 relative overflow-hidden">' +
+            '<div class="relative z-10">' +
+            '<p class="font-display text-xl font-bold">Book your free consultation</p>' +
+            '<p class="mt-1.5 text-sm text-cream/80">Send your plan straight to us on Messenger, or call the main branch.</p>' +
+            '<div class="mt-4 flex flex-wrap gap-2.5">' +
+              '<a href="' + DATA.messenger + '?ref=' + planText + '" target="_blank" rel="noopener" class="btn btn-champagne text-sm py-2.5 px-5">Send my plan on Messenger</a>' +
+              '<a href="tel:' + DATA.phoneTel + '" class="btn btn-ghost-light text-sm py-2.5 px-5">Call ' + DATA.phoneDisplay + '</a>' +
+              '<a href="/book-free-consultation" class="btn btn-ghost-light text-sm py-2.5 px-5">Request a callback</a>' +
+            '</div>' +
+            '<div class="mt-4 flex flex-wrap gap-4 text-xs text-cream/70">' +
+              '<button id="q-save" class="link-underline">Save my plan</button>' +
+              '<button id="q-share" class="link-underline">Share / copy plan</button>' +
+            '</div>' +
+            '<p id="q-toast" class="mt-2 text-xs text-champagne-soft h-4"></p>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+      var toast = document.getElementById("q-toast");
+      var save = document.getElementById("q-save");
+      var share = document.getElementById("q-share");
+      if (save) save.addEventListener("click", function () { persist(); toast.textContent = "Saved to this device - it'll be here when you come back."; });
+      if (share) share.addEventListener("click", function () {
+        var txt = "My Dermamedics plan - Concern: " + concernLabel + "; Budget: " + state.budget + "; Treatments: " + recs.map(function (r) { return r.name; }).join(", ");
+        if (navigator.share) { navigator.share({ title: "My Dermamedics plan", text: txt }).catch(function(){}); }
+        else if (navigator.clipboard) { navigator.clipboard.writeText(txt).then(function () { toast.textContent = "Copied to clipboard."; }); }
+        else { toast.textContent = txt; }
+      });
+    }
+
+    nextBtn.addEventListener("click", function () {
+      if (!currentAnswered()) return;
+      if (state.step < 4) { state.step++; persist(); renderStep(); window.scrollToQuizTop && window.scrollToQuizTop(); }
+      else { renderResult(); }
+    });
+    backBtn.addEventListener("click", function () {
+      if (nextBtn.classList.contains("hidden")) { nextBtn.classList.remove("hidden"); renderStep(); return; }
+      if (state.step > 0) { state.step--; persist(); renderStep(); }
+    });
+    restartBtn.addEventListener("click", function () {
+      state = { concern: null, age: null, budget: null, timeline: null, pref: null, step: 0 };
+      try { localStorage.removeItem(KEY); } catch (e) {}
+      nextBtn.classList.remove("hidden");
+      renderStep();
+    });
+
+    // keyboard: number keys select options
+    document.addEventListener("keydown", function (e) {
+      if (nextBtn.classList.contains("hidden")) return;
+      var n = parseInt(e.key, 10);
+      if (!isNaN(n)) {
+        var opts = body.querySelectorAll(".q-opt");
+        if (opts[n - 1]) opts[n - 1].click();
+      } else if (e.key === "Enter" && !nextBtn.disabled) {
+        nextBtn.click();
+      }
+    });
+
+    renderStep();
+  })();
+  </script>
+</section>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dermamedics-makati.pages.dev/sitemap-index.xml

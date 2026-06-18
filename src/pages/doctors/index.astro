@@ -1,0 +1,35 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import DoctorCard from "../../components/DoctorCard.astro";
+import ClosingCTA from "../../components/ClosingCTA.astro";
+import { doctors } from "../../data/site";
+---
+<Base
+  title="Our Doctors - Dermamedics Makati"
+  description="Meet the doctors of Dermamedics: Dr. Leslie Suyen Tan, Dr. Adelsa Tee and Doc Jam. PRC-licensed, doctor-led aesthetic medicine across two branches in Centuria Medical Makati."
+  path="/doctors"
+>
+  <PageHero
+    eyebrow="Doctor-led · PRC-licensed"
+    title="The doctors you meet"
+    titleAccent="are the doctors who treat you."
+    lead="No anonymous chain, no rotating staff. At Dermamedics your care is led by named physicians - and the doctor at your consultation is the one who plans and performs your treatment."
+  />
+
+  <section class="py-16 sm:py-24 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-stagger>
+        {doctors.map((d) => <DoctorCard doctor={d} />)}
+      </div>
+      <div class="mt-12 rounded-3xl bg-[var(--color-paper)] ring-line p-7 sm:p-8 max-w-3xl" data-reveal>
+        <p class="eyebrow text-[var(--color-champagne-deep)] text-[0.62rem]">On credentials</p>
+        <p class="mt-3 text-[var(--color-ink-soft)] leading-relaxed text-pretty">
+          Our physicians are licensed by the Professional Regulation Commission (PRC) and are verifiable through the PRC online registry. In the Philippines, board-certified dermatologists carry the DPDS or FPDS designation from the Philippine Dermatological Society. Specific licence numbers and society memberships are confirmed with you in person - we'd rather verify a credential than display one we can't.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ClosingCTA heading="Book a consultation with one of our doctors" />
+</Base>

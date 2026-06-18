@@ -1,0 +1,24 @@
+---
+import { business } from "../data/site";
+interface Props {
+  heading?: string;
+  sub?: string;
+}
+const {
+  heading = "Book your free aesthetic-doctor consultation",
+  sub = "A proper assessment, an honest plan, transparent pricing - and no obligation to book on the day. The fastest way to reach us is Messenger.",
+} = Astro.props;
+---
+<section class="relative mesh-aubergine grain text-cream overflow-hidden">
+  <div class="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 py-20 sm:py-28 text-center">
+    <p class="eyebrow text-champagne-soft" data-reveal>Free consultation · No obligation</p>
+    <h2 class="mt-5 font-display font-bold leading-[1.05] text-balance text-[clamp(2.2rem,5vw,4rem)]" data-reveal>{heading}</h2>
+    <p class="mt-6 mx-auto max-w-2xl text-lg text-cream/80 text-pretty" data-reveal>{sub}</p>
+    <div class="mt-9 flex flex-wrap justify-center gap-3" data-reveal>
+      <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-champagne" data-magnetic="0.2">Message us on Messenger</a>
+      <a href={`tel:${business.phonePrimaryTel}`} class="btn btn-ghost-light">Call {business.phonePrimaryDisplay}</a>
+      <a href="/book-free-consultation" class="btn btn-ghost-light">Request a callback</a>
+    </div>
+    <p class="mt-7 text-sm text-cream/55" data-reveal>{business.hours} · Both branches, {business.building}</p>
+  </div>
+</section>

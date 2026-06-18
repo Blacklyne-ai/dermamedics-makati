@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="g1" cx="12%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#5a3c50"/>
+      <stop offset="100%" stop-color="#2a1925"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="90%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#c9a284" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#2a1925" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g1)"/>
+  <rect width="1200" height="630" fill="url(#g2)"/>
+  <text x="80" y="250" font-family="Georgia, serif" font-size="34" letter-spacing="8" fill="#ddc2aa">CENTURIA MEDICAL MAKATI · DOCTOR-LED · SINCE 2010</text>
+  <text x="76" y="360" font-family="Georgia, serif" font-size="92" font-weight="700" fill="#f4efe8">Dermamedics</text>
+  <text x="80" y="440" font-family="Georgia, serif" font-size="44" fill="#f4efe8" opacity="0.85">Aesthetic medicine, priced in plain sight.</text>
+  <text x="80" y="540" font-family="Arial, sans-serif" font-size="26" fill="#ddc2aa">Korean-influenced · Transparent pricing · Two branches</text>
+</svg>

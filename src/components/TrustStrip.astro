@@ -1,0 +1,27 @@
+---
+// Real / verified credentials only - no fabricated licence numbers.
+import { business } from "../data/site";
+const items = [
+  { label: business.building, note: "Inside Manila's premier medical building, Century City" },
+  { label: "PRC-licensed physicians", note: "Verifiable on the PRC online registry" },
+  { label: "Doctor-led care", note: "Injectables & procedures performed by a doctor" },
+  { label: "RA 10173 compliant", note: "Health data handled as sensitive personal data" },
+];
+---
+<section class="bg-[var(--color-paper)] border-b border-[var(--color-line)]">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 py-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-7" data-stagger>
+      {items.map((it) => (
+        <div class="flex items-start gap-3">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="mt-0.5 shrink-0 text-[var(--color-champagne-deep)]" aria-hidden="true">
+            <path d="M12 2l2.5 5 5.5.8-4 3.9.95 5.5L12 20.5 7.05 17.2 8 11.7l-4-3.9L9.5 7z" fill="currentColor" opacity="0.9"/>
+          </svg>
+          <div>
+            <p class="font-semibold text-[var(--color-aubergine)] text-sm leading-snug">{it.label}</p>
+            <p class="text-xs text-[var(--color-ink-soft)] mt-1 leading-snug">{it.note}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

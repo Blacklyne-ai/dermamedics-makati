@@ -1,0 +1,16 @@
+---
+import type { Faq } from "../data/faqs";
+interface Props { items: Faq[]; }
+const { items } = Astro.props;
+---
+<div class="divide-y divide-[var(--color-line)] rounded-3xl bg-[var(--color-paper)] ring-line overflow-hidden" data-stagger>
+  {items.map((f, i) => (
+    <details class="group" {...(i === 0 ? { open: true } : {})}>
+      <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 hover:bg-[var(--color-champagne)]/8 transition-colors">
+        <span class="font-display text-lg font-semibold text-[var(--color-aubergine)] pr-2">{f.q}</span>
+        <span class="shrink-0 w-7 h-7 rounded-full ring-1 ring-[var(--color-line)] flex items-center justify-center text-[var(--color-champagne-deep)] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+      </summary>
+      <div class="px-6 pb-6 -mt-1 text-[var(--color-ink-soft)] leading-relaxed text-pretty">{f.a}</div>
+    </details>
+  ))}
+</div>

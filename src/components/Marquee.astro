@@ -1,0 +1,21 @@
+---
+interface Props {
+  items?: string[];
+  dark?: boolean;
+}
+const {
+  items = ["Korean Mesolipo", "HIFU", "Thermage FLX", "Korean Fillers", "NAD+ Drip", "Jawtox", "Traptox", "Dermlight", "Tattoo Removal", "Carbon Peel"],
+  dark = false,
+} = Astro.props;
+const seq = [...items, ...items];
+---
+<section class={`marquee overflow-hidden border-y ${dark ? "bg-[var(--color-aubergine)] border-white/10" : "bg-[var(--color-paper)] border-[var(--color-line)]"} py-6`}>
+  <div class="marquee-track">
+    {seq.map((item) => (
+      <span class="inline-flex items-center">
+        <span class={`font-display text-xl sm:text-2xl tracking-tight px-6 ${dark ? "text-cream" : "text-[var(--color-aubergine)]"}`}>{item}</span>
+        <span class="text-[var(--color-champagne)] text-lg" aria-hidden="true">◆</span>
+      </span>
+    ))}
+  </div>
+</section>

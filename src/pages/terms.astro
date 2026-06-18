@@ -1,0 +1,38 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { business, manilaDate } from "../data/site";
+const updated = manilaDate();
+---
+<Base
+  title="Terms - Dermamedics Makati"
+  description="Terms of use for the Dermamedics website, including notes on indicative pricing, medical information and consultations."
+  path="/terms"
+>
+  <PageHero eyebrow="Legal" title="Terms of Use" lead={`The basis on which we provide this website and its information. Last updated ${updated}.`} />
+
+  <section class="py-16 sm:py-24 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8 prose-legal">
+      <h2>About this website</h2>
+      <p>This site is operated by {business.legalName}, an aesthetic medicine clinic inside {business.building}, Makati City. By using the site you agree to these terms.</p>
+
+      <h2>Medical information is not medical advice</h2>
+      <p>Treatment descriptions on this site are general information, not a diagnosis or a recommendation for any individual. Suitability for any treatment is determined only after a doctor's assessment. Individual results vary, and no specific outcome is guaranteed.</p>
+
+      <h2>Pricing</h2>
+      <p>Any prices shown are <strong>indicative ranges</strong> intended to give a realistic sense of cost. They are not binding quotes. Your exact, written price is confirmed at your free consultation and may vary with your individual plan. Promotional prices, where offered, have their own terms and validity.</p>
+
+      <h2>Consultations and booking</h2>
+      <p>A free consultation does not oblige you to book treatment. Bookings, cancellations and any deposits are subject to the clinic's policies, explained to you at the time.</p>
+
+      <h2>Intellectual property</h2>
+      <p>The content, design and branding on this site belong to Dermamedics unless stated otherwise, and may not be reproduced without permission.</p>
+
+      <h2>External links</h2>
+      <p>We link to third-party platforms (such as Facebook, Messenger, Instagram and Google Maps) for your convenience. We are not responsible for their content or practices.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about these terms? Reach us via Messenger ({business.messengerLabel}), phone {business.phonePrimaryDisplay}, or email {business.email}.</p>
+    </div>
+  </section>
+</Base>

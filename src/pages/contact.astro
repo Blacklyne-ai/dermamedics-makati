@@ -1,0 +1,47 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import ContactSection from "../components/ContactSection.astro";
+import ClosingCTA from "../components/ClosingCTA.astro";
+import { business, branches } from "../data/site";
+---
+<Base
+  title="Contact - Dermamedics Makati"
+  description="Contact Dermamedics: Messenger, phone and both branch details inside Centuria Medical Makati. Open daily 10AM–8PM."
+  path="/contact"
+>
+  <PageHero
+    eyebrow="Get in touch"
+    title="We're easy"
+    titleAccent="to reach."
+    lead={`Message us on Messenger, call either branch, or drop in. Both clinics are inside ${business.building}, open ${business.hoursShort}, daily.`}
+  >
+    <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+      <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-champagne">Message on Messenger</a>
+      <a href={`tel:${business.phonePrimaryTel}`} class="btn btn-ghost-light">Call {business.phonePrimaryDisplay}</a>
+    </div>
+  </PageHero>
+
+  <!-- Quick contacts -->
+  <section class="py-14 bg-[var(--color-paper)] border-b border-[var(--color-line)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6" data-stagger>
+      <div>
+        <p class="eyebrow text-[var(--color-champagne-deep)] text-[0.6rem]">Messenger</p>
+        <a href={business.messenger} target="_blank" rel="noopener" class="mt-1 block font-semibold text-[var(--color-aubergine)] link-underline">{business.messengerLabel}</a>
+      </div>
+      <div>
+        <p class="eyebrow text-[var(--color-champagne-deep)] text-[0.6rem]">Instagram</p>
+        <a href={business.instagram} target="_blank" rel="noopener" class="mt-1 block font-semibold text-[var(--color-aubergine)] link-underline">{business.instagramHandle}</a>
+      </div>
+      {branches.map((b) => (
+        <div>
+          <p class="eyebrow text-[var(--color-champagne-deep)] text-[0.6rem]">{b.name}</p>
+          <a href={`tel:${b.phoneTel}`} class="mt-1 block font-semibold text-[var(--color-aubergine)] link-underline">{b.phoneDisplay}</a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <ContactSection />
+  <ClosingCTA />
+</Base>

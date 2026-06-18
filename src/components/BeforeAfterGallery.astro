@@ -1,0 +1,126 @@
+---
+import { divisions } from "../data/treatments";
+import { business } from "../data/site";
+
+interface Props {
+  limit?: number;
+  heading?: boolean;
+}
+const { limit = 0, heading = true } = Astro.props;
+
+// Curated result slots - one representative treatment per division (and a few extra).
+// Image slots are consent-ready placeholders: real, consented patient photos are a
+// flagged client-supply item. Honest framing, never fabricated "results".
+const picks = [
+  { div: "body-slimming", t: "korean-mesolipo", dur: "Course of 4 sessions" },
+  { div: "aesthetic-medicine", t: "korean-fillers", dur: "Single session" },
+  { div: "anti-ageing", t: "hifu-face", dur: "Results at 12 weeks" },
+  { div: "skin-brightening", t: "carbon-peel", dur: "3 sessions" },
+  { div: "acne", t: "anti-acne-package", dur: "8-week package" },
+  { div: "aesthetic-medicine", t: "jawtox", dur: "Reviewed at 4 weeks" },
+  { div: "lasers", t: "pico-laser", dur: "Course of sessions" },
+  { div: "tattoo-removal", t: "laser-tattoo-removal", dur: "Multi-session package" },
+  { div: "skin-brightening", t: "q-switch-laser", dur: "Course of sessions" },
+  { div: "anti-ageing", t: "thermage-flx", dur: "Single session" },
+  { div: "body-slimming", t: "cryolipolysis", dur: "Results over 12 weeks" },
+  { div: "iv-drips", t: "whitening-glutathione-drip", dur: "Weekly course" },
+];
+
+const items = picks
+  .map((p) => {
+    const d = divisions.find((x) => x.slug === p.div)!;
+    const t = d.treatments.find((x) => x.slug === p.t);
+    if (!t) return null;
+    return { divisionSlug: d.slug, divisionName: d.name, glyph: d.glyph, name: t.name, korean: !!t.korean, dur: p.dur, slug: t.slug };
+  })
+  .filter(Boolean) as { divisionSlug: string; divisionName: string; glyph: string; name: string; korean: boolean; dur: string; slug: string }[];
+
+const shown = limit ? items.slice(0, limit) : items;
+const filters = [{ slug: "all", name: "All results" }, ...divisions.map((d) => ({ slug: d.slug, name: d.name }))]
+  .filter((f) => f.slug === "all" || items.some((i) => i.divisionSlug === f.slug));
+---
+<section class="py-20 sm:py-28 bg-[var(--color-cream)]">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    {heading && (
+      <div class="max-w-2xl mb-10">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>Real results · Filterable</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>
+          Before &amp; after, <span class="italic font-normal">honestly framed.</span>
+        </h2>
+        <p class="mt-5 text-[var(--color-ink-soft)] text-pretty" data-reveal>
+          Individual results vary, and every photo we publish is shared with explicit patient consent. Filter by what you're considering.
+        </p>
+      </div>
+    )}
+
+    {limit === 0 && (
+      <div class="flex flex-wrap gap-2 mb-8" id="ba-filters" data-reveal>
+        {filters.map((f, i) => (
+          <button
+            data-filter={f.slug}
+            class={`ba-filter text-sm font-medium rounded-full px-4 py-2 ring-1 transition-all ${i === 0 ? "ring-[var(--color-aubergine)] bg-[var(--color-aubergine)] text-cream" : "ring-[var(--color-line)] text-[var(--color-ink-soft)] hover:ring-[var(--color-champagne)]"}`}>
+            {f.name}
+          </button>
+        ))}
+      </div>
+    )}
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="ba-grid" data-stagger>
+      {shown.map((it) => (
+        <article class="ba-card group rounded-3xl overflow-hidden ring-line bg-[var(--color-paper)] shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-lift)] transition-all" data-div={it.divisionSlug} data-tilt="3">
+          <div class="relative grid grid-cols-2 aspect-[5/3]">
+            <div class="relative flex items-end p-4" style="background:linear-gradient(135deg,#5a3c50,#2a1925)">
+              <span class="text-[10px] uppercase tracking-[0.2em] text-cream/70">Before</span>
+            </div>
+            <div class="relative flex items-end justify-end p-4" style="background:linear-gradient(135deg,#ddc2aa,#c9a284)">
+              <span class="text-[10px] uppercase tracking-[0.2em] text-[#3d2737]/80">After</span>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 w-px bg-cream/40"></div>
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-cream/90 flex items-center justify-center text-[var(--color-aubergine)] text-xs font-bold">↔</div>
+            <span class="absolute top-3 left-1/2 -translate-x-1/2 text-[10px] text-cream/60 bg-[#2a1925]/40 rounded-full px-2 py-0.5">photo added with consent</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <span class="eyebrow text-[var(--color-champagne-deep)] text-[0.62rem]">{it.divisionName}{it.korean ? " · Korean" : ""}</span>
+              <span class="font-display text-xl text-[var(--color-champagne)]">{it.glyph}</span>
+            </div>
+            <h3 class="mt-1.5 font-display text-lg font-bold text-[var(--color-aubergine)]">{it.name}</h3>
+            <p class="mt-1 text-sm text-[var(--color-ink-soft)]">{it.dur}</p>
+            <a href={`/treatments/${it.divisionSlug}/${it.slug}`} class="mt-3 inline-flex link-underline text-sm font-semibold text-[var(--color-aubergine)]">Book this treatment →</a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    {limit > 0 && (
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/before-after-gallery" class="btn btn-ghost">See the full results gallery</a>
+      </div>
+    )}
+    <p class="mt-8 text-xs text-[var(--color-ink-soft)] max-w-2xl">
+      Note: image slots above are consent-ready placeholders. Real before/after photography will be added with each patient's written consent. To discuss realistic outcomes for your skin, <a href={business.messenger} target="_blank" rel="noopener" class="underline text-[var(--color-champagne-deep)]">message us</a>.
+    </p>
+  </div>
+</section>
+
+{limit === 0 && (
+  <script is:inline>
+    (function () {
+      var btns = document.querySelectorAll(".ba-filter");
+      var cards = document.querySelectorAll(".ba-card");
+      btns.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var f = b.getAttribute("data-filter");
+          btns.forEach(function (x) {
+            x.className = "ba-filter text-sm font-medium rounded-full px-4 py-2 ring-1 transition-all ring-[var(--color-line)] text-[var(--color-ink-soft)] hover:ring-[var(--color-champagne)]";
+          });
+          b.className = "ba-filter text-sm font-medium rounded-full px-4 py-2 ring-1 transition-all ring-[var(--color-aubergine)] bg-[var(--color-aubergine)] text-cream";
+          cards.forEach(function (c) {
+            var show = f === "all" || c.getAttribute("data-div") === f;
+            c.style.display = show ? "" : "none";
+          });
+        });
+      });
+    })();
+  </script>
+)}

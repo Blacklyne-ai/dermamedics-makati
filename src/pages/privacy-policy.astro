@@ -1,0 +1,56 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { business, manilaDate } from "../data/site";
+const updated = manilaDate();
+---
+<Base
+  title="Privacy Policy - Dermamedics Makati"
+  description="How Dermamedics collects, uses and protects your personal and sensitive health data, in compliance with the Data Privacy Act of 2012 (RA 10173) and the National Privacy Commission."
+  path="/privacy-policy"
+>
+  <PageHero eyebrow="Legal · RA 10173" title="Privacy Policy" lead={`How we handle your personal and health information, under the Data Privacy Act of 2012. Last updated ${updated}.`} />
+
+  <section class="py-16 sm:py-24 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8 prose-legal">
+      <p>{business.legalName} ("Dermamedics", "we", "us") respects your privacy. This policy explains what personal information we collect, why, and your rights under the <strong>Data Privacy Act of 2012 (Republic Act No. 10173)</strong> and the rules of the National Privacy Commission (NPC).</p>
+
+      <h2>Who we are</h2>
+      <p>Dermamedics is an aesthetic medicine clinic operating two branches inside {business.building}, Kalayaan Ave. cor. Salamanca St., Brgy. Poblacion, Makati City 1210. We are the Personal Information Controller for the data described here. For privacy enquiries, contact us via Messenger ({business.messengerLabel}), by phone on {business.phonePrimaryDisplay}, or by email at {business.email}.</p>
+
+      <h2>Information we collect</h2>
+      <ul>
+        <li><strong>Information you give us</strong> - your name, contact number, email, preferred branch and the treatment you enquire about, when you message us, call, or use the booking form.</li>
+        <li><strong>Health information</strong> - during consultation and treatment we collect relevant medical and skin history. Under RA 10173 this is <em>sensitive personal information</em> and receives heightened protection.</li>
+        <li><strong>Website information</strong> - basic analytics and cookie data (see below) about how this site is used.</li>
+      </ul>
+
+      <h2>How we use it</h2>
+      <ul>
+        <li>To respond to your enquiry and arrange your free consultation.</li>
+        <li>To assess, plan and deliver treatment safely.</li>
+        <li>To keep accurate clinical records as required of a medical practice.</li>
+        <li>To improve our website and services.</li>
+      </ul>
+      <p>We process sensitive personal information on the basis of your consent and as necessary for the provision of medical care.</p>
+
+      <h2>Cookies</h2>
+      <p>This site uses essential cookies to function and may use analytics cookies to understand usage. You can choose "Essential only" or "Accept" via our cookie banner, and you can clear cookies in your browser at any time.</p>
+
+      <h2>Sharing your information</h2>
+      <p>We do not sell your data. We share it only with the staff and doctors involved in your care, and with service providers (such as hosting or messaging platforms) strictly as needed to operate. We may disclose information where required by law.</p>
+
+      <h2>How long we keep it</h2>
+      <p>Enquiry data is kept only as long as needed to assist you. Clinical records are retained for the period required of medical practices under Philippine law and professional standards.</p>
+
+      <h2>Your rights under RA 10173</h2>
+      <p>You have the right to be informed, to access your data, to correct inaccuracies, to object to or withdraw consent for processing, to erasure or blocking where applicable, to data portability, to be indemnified for damages, and to lodge a complaint with the National Privacy Commission (<a href="https://privacy.gov.ph" target="_blank" rel="noopener">privacy.gov.ph</a>). To exercise any right, contact us using the details above.</p>
+
+      <h2>Security</h2>
+      <p>We apply reasonable organisational, physical and technical measures to protect your information, with additional safeguards for sensitive health data.</p>
+
+      <h2>Changes</h2>
+      <p>We may update this policy. The current version and its date appear at the top of this page.</p>
+    </div>
+  </section>
+</Base>

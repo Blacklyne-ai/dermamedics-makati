@@ -1,0 +1,287 @@
+---
+import Base from "../layouts/Base.astro";
+import TrustStrip from "../components/TrustStrip.astro";
+import TreatmentQuiz from "../components/TreatmentQuiz.astro";
+import Marquee from "../components/Marquee.astro";
+import DoctorCard from "../components/DoctorCard.astro";
+import Testimonials from "../components/Testimonials.astro";
+import BeforeAfterGallery from "../components/BeforeAfterGallery.astro";
+import FaqAccordion from "../components/FaqAccordion.astro";
+import ClosingCTA from "../components/ClosingCTA.astro";
+import ContactSection from "../components/ContactSection.astro";
+import { business, doctors, stats, branches } from "../data/site";
+import { divisions } from "../data/treatments";
+import { faqs } from "../data/faqs";
+
+const reasons = [
+  { n: "01", t: "Fifteen years, same building", d: "Elevating beauty since 2010 - a decade and a half of doctor-led practice inside Centuria Medical Makati. The clinic your friend's mother trusted, still here." },
+  { n: "02", t: "Doctor-led, not chain-led", d: "Three named doctors - Dr. Tan, Dr. Tee and Doc Jam. Injectables and procedures are performed by a physician, with a conservative, face-first hand." },
+  { n: "03", t: "Korean clinical methodology", d: "Korean fillers, Mesolipo, PDO threads and Ultraformer HIFU - lighter doses, more layers, results that look like you rested, not like you 'had something done'." },
+  { n: "04", t: "Priced in plain sight", d: "Most Manila clinics hide the cost until you're in the chair. We show you the price first, every time. Transparency is the whole point." },
+];
+const homeFaqs = faqs.filter((f) => ["Will you tell me the price before I commit?", "What does 'Korean-influenced' actually mean here?", "Are treatments done by a doctor?", "How do I book?"].includes(f.q));
+---
+<Base
+  title="Dermamedics Makati - Doctor-led, Korean-influenced aesthetic medicine"
+  description="Doctor-led, Korean-influenced aesthetic medicine inside Centuria Medical Makati. Transparent pricing, fifteen years, two branches. Free aesthetic-doctor consultation - book on Messenger."
+  path="/"
+>
+  <!-- ===== HERO ===== -->
+  <section class="relative mesh-aubergine grain text-cream overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-32 pb-20 sm:pt-40 sm:pb-28">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7">
+          <p class="eyebrow text-champagne-soft" data-reveal>Centuria Medical Makati · Doctor-led · Since 2010</p>
+          <h1 class="mt-6 font-display leading-[1.02] text-balance text-[clamp(2.8rem,7vw,5.6rem)]" data-reveal>
+            <span class="font-bold">Aesthetic medicine,</span>
+            <span class="block font-normal italic text-champagne-soft">priced in plain sight.</span>
+          </h1>
+          <p class="mt-7 max-w-xl text-lg sm:text-xl text-cream/80 leading-relaxed text-pretty" data-reveal>
+            Doctor-led, Korean-influenced treatments inside Manila's premier medical building. Fifteen years, two branches, three doctors - and the honest pricing every other clinic hides.
+          </p>
+          <div class="mt-9 flex flex-wrap gap-3" data-reveal>
+            <a href="#quiz" class="btn btn-champagne" data-magnetic="0.2">Start the treatment quiz</a>
+            <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-ghost-light">Message us on Messenger</a>
+          </div>
+          <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-cream/70" data-reveal>
+            <span class="flex items-center gap-2"><span class="text-champagne text-base">★</span> {business.googleRating} · {business.googleReviewCount} Google reviews</span>
+            <span class="flex items-center gap-2"><span class="text-champagne">◆</span> {business.facebookCommunity} community</span>
+            <span class="flex items-center gap-2"><span class="text-champagne">◆</span> Free consultation</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5" data-reveal="right">
+          <div class="relative">
+            <div class="floaty glass-dark rounded-3xl p-7 shadow-[var(--shadow-float)]">
+              <p class="eyebrow text-champagne-soft text-[0.62rem]">Free aesthetic-doctor consultation</p>
+              <p class="mt-3 font-display text-2xl font-bold text-cream leading-snug">Know the plan and the price before anything begins.</p>
+              <ul class="mt-5 space-y-3 text-sm text-cream/80">
+                <li class="flex gap-2.5"><span class="text-champagne">›</span> A proper doctor's assessment</li>
+                <li class="flex gap-2.5"><span class="text-champagne">›</span> A treatment plan tailored to you</li>
+                <li class="flex gap-2.5"><span class="text-champagne">›</span> Transparent, written pricing</li>
+                <li class="flex gap-2.5"><span class="text-champagne">›</span> No obligation to book on the day</li>
+              </ul>
+              <a href="/book-free-consultation" class="btn btn-champagne w-full mt-6 text-sm">Book my free consultation</a>
+              <p class="mt-3 text-center text-xs text-cream/55">{business.hours}</p>
+            </div>
+            <div class="absolute -z-0 -top-6 -right-6 w-28 h-28 rounded-full bg-[var(--color-champagne)]/20 blur-2xl"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- stat band -->
+    <div class="relative z-10 border-t border-white/10">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <dl class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
+          {stats.map((s) => (
+            <div class="py-7 px-5 first:pl-0 text-center lg:text-left">
+              <dt class="sr-only">{s.label}</dt>
+              <dd class="font-display text-3xl sm:text-4xl font-bold text-cream">{s.value}</dd>
+              <dd class="mt-1 text-xs sm:text-sm text-cream/65">{s.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <TrustStrip />
+
+  <!-- ===== QUIZ (wow factor) ===== -->
+  <TreatmentQuiz />
+
+  <!-- ===== FOUR GOOD REASONS ===== -->
+  <section class="py-20 sm:py-28 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl mb-12">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>Why Dermamedics</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>
+          Four reasons Makati <span class="italic font-normal">keeps coming back.</span>
+        </h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5" data-stagger>
+        {reasons.map((r) => (
+          <div class="rounded-3xl bg-[var(--color-paper)] ring-line p-7 sm:p-8 hover:shadow-[var(--shadow-lift)] transition-all" data-tilt="2">
+            <span class="font-display text-3xl font-bold text-[var(--color-champagne)]">{r.n}</span>
+            <h3 class="mt-3 font-display text-2xl font-bold text-[var(--color-aubergine)]">{r.t}</h3>
+            <p class="mt-3 text-[var(--color-ink-soft)] leading-relaxed text-pretty">{r.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EIGHT DIVISIONS BENTO ===== -->
+  <section class="py-20 sm:py-28 bg-[var(--color-paper)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+        <div class="max-w-2xl">
+          <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>Eight treatment divisions</p>
+          <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>
+            The full menu, <span class="italic font-normal">clearly mapped.</span>
+          </h2>
+        </div>
+        <a href="/treatments" class="btn btn-ghost shrink-0" data-reveal>Browse all treatments</a>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" data-stagger>
+        {divisions.map((d, i) => (
+          <a href={`/treatments/${d.slug}`} class={`group relative rounded-3xl ring-line p-7 overflow-hidden transition-all hover:shadow-[var(--shadow-lift)] ${i === 0 || i === 5 ? "sm:col-span-2 mesh-aubergine grain text-cream" : "bg-[var(--color-cream)]"}`} data-tilt="2">
+            <div class="relative z-10 flex flex-col h-full">
+              <div class="flex items-center justify-between">
+                <span class={`eyebrow text-[0.6rem] ${i === 0 || i === 5 ? "text-champagne-soft" : "text-[var(--color-champagne-deep)]"}`}>{d.number} · {d.tag}</span>
+                <span class={`font-display text-3xl ${i === 0 || i === 5 ? "text-champagne" : "text-[var(--color-champagne)]"}`}>{d.glyph}</span>
+              </div>
+              <h3 class={`mt-4 font-display text-2xl font-bold ${i === 0 || i === 5 ? "text-cream" : "text-[var(--color-aubergine)]"}`}>{d.name}</h3>
+              <p class={`mt-2 text-sm leading-snug flex-grow ${i === 0 || i === 5 ? "text-cream/75" : "text-[var(--color-ink-soft)]"}`}>{d.blurb}</p>
+              <span class={`mt-5 inline-flex items-center gap-1.5 text-sm font-semibold ${i === 0 || i === 5 ? "text-champagne-soft" : "text-[var(--color-aubergine)]"}`}>
+                Explore {d.treatments.length} treatments
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KOREAN INFLUENCE ===== -->
+  <section class="py-20 sm:py-28 mesh-aubergine grain text-cream relative overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <p class="eyebrow text-champagne-soft" data-reveal>The Korean influence</p>
+          <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)]" data-reveal>
+            A method, <span class="italic font-normal text-champagne-soft">not a buzzword.</span>
+          </h2>
+          <p class="mt-6 text-lg text-cream/80 leading-relaxed text-pretty" data-reveal>
+            "Korean-influenced" gets thrown around a lot in Manila. Here it means something specific: Korean products and Korean technique - lighter doses applied in more layers, for a result that reads as natural rather than done.
+          </p>
+          <ul class="mt-7 space-y-3 text-cream/85" data-stagger>
+            <li class="flex gap-3"><span class="text-champagne">◆</span> <span><strong>Korean fillers</strong> - Neuramis (Medytox), Yvoire (LG Chem): soft, natural, reversible HA.</span></li>
+            <li class="flex gap-3"><span class="text-champagne">◆</span> <span><strong>Korean Mesolipo</strong> - injectable fat reduction for stubborn, localised pockets.</span></li>
+            <li class="flex gap-3"><span class="text-champagne">◆</span> <span><strong>Korean PDO threads</strong> - a non-surgical lift that seeds your own collagen.</span></li>
+            <li class="flex gap-3"><span class="text-champagne">◆</span> <span><strong>Ultraformer HIFU</strong> - Korean-engineered focused ultrasound tightening.</span></li>
+          </ul>
+          <a href="/korean-influence" class="btn btn-champagne mt-8" data-reveal>Why Korean methodology matters</a>
+        </div>
+        <div class="relative" data-reveal="scale">
+          <div class="aspect-square rounded-[2rem] glass-dark p-8 flex flex-col justify-center">
+            <p class="font-display text-[clamp(3rem,8vw,6rem)] leading-none font-bold text-champagne-soft">한국</p>
+            <p class="mt-4 font-display text-2xl text-cream">The Korean glow, clinically delivered.</p>
+            <p class="mt-3 text-cream/70 text-sm">Skin boosters, mesotherapy and layered injectables - the cumulative, lit-from-within result Korean aesthetics is known for.</p>
+          </div>
+          <div class="absolute -bottom-5 -left-5 w-32 h-32 rounded-full bg-[var(--color-champagne)]/20 blur-3xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BEFORE / AFTER (secondary wow) ===== -->
+  <BeforeAfterGallery limit={6} />
+
+  <!-- ===== THREE DOCTORS ===== -->
+  <section class="py-20 sm:py-28 bg-[var(--color-paper)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl mb-12">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>Three doctors</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>
+          The doctors you meet <span class="italic font-normal">are the doctors who treat you.</span>
+        </h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-stagger>
+        {doctors.map((d) => <DoctorCard doctor={d} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRICING TEASER ===== -->
+  <section class="py-20 sm:py-28 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="rounded-[2rem] ring-line bg-[var(--color-paper)] p-8 sm:p-12 lg:p-16 relative overflow-hidden">
+        <div class="grid lg:grid-cols-2 gap-10 items-center relative z-10">
+          <div>
+            <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>What does it cost?</p>
+            <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(1.9rem,4vw,3rem)] text-[var(--color-aubergine)]" data-reveal>
+              We'll answer that <span class="italic font-normal">before you're on the table.</span>
+            </h2>
+            <p class="mt-5 text-[var(--color-ink-soft)] text-pretty" data-reveal>
+              Aesthetic treatments are planned per person, so a single fixed list would be dishonest. Instead we publish honest indicative ranges, then give you an exact, written quote at your free consultation. No surprises at the counter.
+            </p>
+            <a href="/transparent-pricing" class="btn btn-primary mt-7" data-reveal>See indicative pricing</a>
+          </div>
+          <div class="space-y-3" data-stagger>
+            {[
+              { t: "Crow's feet / expression Botox", p: "from ₱8,000", n: "per area, indicative" },
+              { t: "Korean fillers", p: "from ₱14,999", n: "per syringe, indicative" },
+              { t: "Jawtox - masseter slimming", p: "from ₱12,000", n: "indicative, per area" },
+              { t: "HIFU, Mesolipo, lasers & drips", p: "Planned to you", n: "quoted free at consultation" },
+            ].map((row) => (
+              <div class="flex items-center justify-between gap-4 rounded-2xl bg-[var(--color-cream)] ring-line px-5 py-4">
+                <span class="text-sm font-medium text-[var(--color-aubergine)]">{row.t}</span>
+                <span class="text-right shrink-0">
+                  <span class="block font-display font-bold text-[var(--color-aubergine)]">{row.p}</span>
+                  <span class="block text-[0.7rem] text-[var(--color-ink-soft)]">{row.n}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-[var(--color-champagne)]/15 blur-3xl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <Testimonials count={6} />
+
+  <!-- ===== BOTH BRANCHES ===== -->
+  <section class="py-20 sm:py-28 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl mb-12">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>Two branches</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>
+          One building, <span class="italic font-normal">two floors.</span>
+        </h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5" data-stagger>
+        {branches.map((b) => (
+          <div class="rounded-3xl bg-[var(--color-paper)] ring-line p-7 sm:p-8 hover:shadow-[var(--shadow-lift)] transition-all">
+            <div class="flex items-center justify-between">
+              <span class="eyebrow text-[var(--color-champagne-deep)] text-[0.62rem]">{b.isMain ? "Main branch" : "Facial & body center"}</span>
+              <span class="font-display text-2xl font-bold text-[var(--color-champagne)]">{b.floor.replace("th Floor", "F").replace("st Floor","F")}</span>
+            </div>
+            <h3 class="mt-3 font-display text-2xl font-bold text-[var(--color-aubergine)]">{b.name}</h3>
+            <p class="mt-1 text-sm text-[var(--color-ink-soft)]">{b.unit}</p>
+            <p class="mt-3 text-[var(--color-ink-soft)] text-sm leading-relaxed">{b.note}</p>
+            <div class="mt-5 flex items-center gap-4">
+              <a href={`tel:${b.phoneTel}`} class="link-underline text-sm font-semibold text-[var(--color-aubergine)]">{b.phoneDisplay}</a>
+              <a href="/branches" class="link-underline text-sm font-semibold text-[var(--color-champagne-deep)]">Branch details →</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Marquee />
+
+  <!-- ===== FAQ PREVIEW ===== -->
+  <section class="py-20 sm:py-28 bg-[var(--color-paper)]">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8">
+      <div class="text-center mb-10">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>Before you ask</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>
+          The honest answers.
+        </h2>
+      </div>
+      <FaqAccordion items={homeFaqs} />
+      <div class="mt-8 text-center" data-reveal>
+        <a href="/faq" class="btn btn-ghost">All questions</a>
+      </div>
+    </div>
+  </section>
+
+  <ClosingCTA />
+  <ContactSection />
+</Base>

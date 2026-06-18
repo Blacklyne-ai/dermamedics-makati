@@ -1,0 +1,29 @@
+---
+// Data Privacy Act of 2012 (RA 10173) - explicit consent banner
+---
+<div id="cookie-banner" class="fixed bottom-0 inset-x-0 z-[58] hidden">
+  <div class="mx-auto max-w-3xl m-4 glass rounded-2xl p-5 sm:p-6 shadow-[var(--shadow-lift)]">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <p class="text-sm text-[var(--color-ink-soft)] leading-relaxed">
+        We use cookies to run this site and understand how it's used. As a medical clinic we treat health information as sensitive personal data under the
+        <strong class="text-[var(--color-aubergine)]"> Data Privacy Act of 2012 (RA 10173)</strong>. See our
+        <a href="/privacy-policy" class="underline text-[var(--color-champagne-deep)]">Privacy Policy</a>.
+      </p>
+      <div class="flex gap-2.5 shrink-0">
+        <button id="cookie-decline" class="btn btn-ghost text-sm py-2.5 px-4">Essential only</button>
+        <button id="cookie-accept" class="btn btn-primary text-sm py-2.5 px-4">Accept</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = "dm-consent";
+    var banner = document.getElementById("cookie-banner");
+    try { if (!localStorage.getItem(KEY)) banner.classList.remove("hidden"); } catch (e) { banner.classList.remove("hidden"); }
+    function set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} banner.classList.add("hidden"); }
+    document.getElementById("cookie-accept").addEventListener("click", function () { set("all"); });
+    document.getElementById("cookie-decline").addEventListener("click", function () { set("essential"); });
+  })();
+</script>

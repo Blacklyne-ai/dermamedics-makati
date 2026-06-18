@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import TreatmentQuiz from "../components/TreatmentQuiz.astro";
+import ClosingCTA from "../components/ClosingCTA.astro";
+---
+<Base
+  title="Treatment Discovery Quiz - Dermamedics Makati"
+  description="Answer five quick questions and get a personalised, doctor-led treatment plan with indicative pricing - then book a free consultation. No hidden fees, no pressure."
+  path="/treatment-discovery-quiz"
+>
+  <PageHero
+    eyebrow="Free personalised plan · 90 seconds"
+    title="Tell us your concern."
+    titleAccent="Get a plan and a price."
+    lead="Five quick questions - your concern, age, budget, timeline and who you'd like to see. We'll match you to the right doctor-led treatments with indicative pricing, then it's a free consultation to confirm. No pressure, no hidden fees."
+  />
+
+  <section class="py-14 sm:py-20 bg-[var(--color-cream)]">
+    <TreatmentQuiz variant="page" />
+  </section>
+
+  <ClosingCTA heading="Prefer to just talk to someone?" sub="Skip the quiz and message us on Messenger, or call the main branch. Either way, the consultation is free and the price comes first." />
+</Base>

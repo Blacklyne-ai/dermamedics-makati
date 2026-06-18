@@ -1,0 +1,106 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import DoctorCard from "../components/DoctorCard.astro";
+import ClosingCTA from "../components/ClosingCTA.astro";
+import { business, doctors, stats } from "../data/site";
+
+const values = [
+  { t: "Transparency first", d: "We show you the price before anything begins. It sounds basic - in Manila aesthetics, it's rare. It's also the thing our patients name most often." },
+  { t: "Doctor-led, always", d: "Medical procedures are performed by a physician. We tell you who is doing what, and why, so the choice is yours." },
+  { t: "Conservative by design", d: "The Korean approach we follow favours subtlety - lighter doses, more layers. We'd rather you came back for a top-up than left looking overdone." },
+  { t: "Honest expectations", d: "If a treatment isn't right for you, we'll say so. If results take time, we'll tell you how long. No overpromising." },
+];
+---
+<Base
+  title="About Dermamedics - Fifteen years in Centuria Medical Makati"
+  description="Elevating beauty since 2010. The story of Dermamedics - a doctor-led, Korean-influenced aesthetic medicine clinic inside Centuria Medical Makati, built on transparent pricing and fifteen years of word of mouth."
+  path="/about"
+>
+  <PageHero
+    eyebrow="Our story · Elevating beauty since 2010"
+    title="Fifteen years of"
+    titleAccent="doing it honestly."
+    lead="Dermamedics has practised doctor-led aesthetic medicine inside Centuria Medical Makati since 2010. Two branches, three doctors, one principle: tell people the truth - about the treatment, and about the price."
+  />
+
+  <!-- Stat band -->
+  <section class="bg-[var(--color-paper)] border-b border-[var(--color-line)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <dl class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-[var(--color-line)]">
+        {stats.map((s) => (
+          <div class="py-8 px-5 first:pl-0 text-center lg:text-left">
+            <dd class="font-display text-3xl sm:text-4xl font-bold text-[var(--color-aubergine)]">{s.value}</dd>
+            <dd class="mt-1 text-xs sm:text-sm text-[var(--color-ink-soft)]">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="py-20 sm:py-28 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>The clinic</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.06] text-[clamp(1.9rem,4vw,3rem)] text-[var(--color-aubergine)]" data-reveal>
+          The same doctors, the same building, <span class="italic font-normal">for fifteen years.</span>
+        </h2>
+        <div class="mt-6 space-y-5 text-[var(--color-ink-soft)] text-lg leading-relaxed text-pretty" data-reveal>
+          <p>Dermamedics opened in 2010 with a simple idea: aesthetic medicine should be led by doctors and priced without games. Fifteen years later, we're still inside {business.building} - one of Manila's premier medical buildings, in the heart of Century City - across two floors.</p>
+          <p>Our 17th-floor flagship handles doctor-led injectables, anti-ageing and lasers with Dr. Leslie Suyen Tan and Dr. Adelsa Tee. The 9th-floor facial &amp; body center is home to Doc Jam, the name our reviews mention most, for slimming and Korean fillers.</p>
+          <p>Over the years we've leaned into Korean clinical methodology - lighter doses, more layers, the kind of result that looks like rest rather than work. And through all of it, the thing patients keep coming back for is the simplest: we tell you the price first.</p>
+        </div>
+      </div>
+      <aside class="lg:col-span-5" data-reveal="right">
+        <div class="rounded-3xl mesh-aubergine grain text-cream p-8 relative overflow-hidden">
+          <div class="relative z-10">
+            <p class="eyebrow text-champagne-soft text-[0.62rem]">Inside Centuria Medical Makati</p>
+            <p class="mt-3 font-display text-2xl font-bold">A premier medical address</p>
+            <p class="mt-3 text-cream/80 leading-relaxed text-sm">Centuria Medical Makati is one of the most respected medical buildings in Metro Manila - a concentration of specialists in Century City, with the infrastructure and standards a serious clinic needs. Practising here for fifteen years is itself a credential.</p>
+            <ul class="mt-5 space-y-2.5 text-sm text-cream/85">
+              <li class="flex gap-2.5"><span class="text-champagne">›</span> PRC-licensed physicians, verifiable on the PRC registry</li>
+              <li class="flex gap-2.5"><span class="text-champagne">›</span> Listed on the official Centuria Medical directory</li>
+              <li class="flex gap-2.5"><span class="text-champagne">›</span> Health data handled under RA 10173</li>
+            </ul>
+            <a href="/branches" class="btn btn-champagne w-full mt-6 text-sm">See both branches</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="py-20 sm:py-28 bg-[var(--color-paper)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl mb-12">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>How we work</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>Four things we won't compromise.</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5" data-stagger>
+        {values.map((v, i) => (
+          <div class="rounded-3xl bg-[var(--color-cream)] ring-line p-7 hover:shadow-[var(--shadow-lift)] transition-all" data-tilt="2">
+            <span class="font-display text-3xl font-bold text-[var(--color-champagne)]">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="mt-3 font-display text-xl font-bold text-[var(--color-aubergine)]">{v.t}</h3>
+            <p class="mt-2.5 text-[var(--color-ink-soft)] leading-relaxed text-pretty">{v.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctors -->
+  <section class="py-20 sm:py-28 bg-[var(--color-cream)]">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="max-w-2xl mb-12">
+        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>The team</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>Three doctors, two branches.</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-stagger>
+        {doctors.map((d) => <DoctorCard doctor={d} />)}
+      </div>
+    </div>
+  </section>
+
+  <ClosingCTA />
+</Base>
