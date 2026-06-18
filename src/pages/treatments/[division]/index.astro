@@ -10,7 +10,7 @@ export function getStaticPaths() {
 const { division } = Astro.props;
 ---
 <Base
-  title={`${division.name} - Dermamedics Makati`}
+  title={`${division.name} - DermaMedics Makati`}
   description={`${division.intro} Doctor-led, Korean-influenced, transparently priced inside Centuria Medical Makati.`}
   path={`/treatments/${division.slug}`}
 >
@@ -20,7 +20,7 @@ const { division } = Astro.props;
     lead={division.intro}
   >
     <div class="mt-8 flex flex-wrap gap-3" data-reveal>
-      <a href="#treatments" class="btn btn-champagne">See the {division.treatments.length} treatments</a>
+      <a href="#treatments" class="btn btn-gold">See the {division.treatments.length} treatments</a>
       <a href="/treatment-discovery-quiz" class="btn btn-ghost-light">Take the quiz</a>
     </div>
   </PageHero>
@@ -28,22 +28,22 @@ const { division } = Astro.props;
   <section id="treatments" class="py-16 sm:py-24 bg-[var(--color-cream)]">
     <div class="mx-auto max-w-7xl px-5 sm:px-8">
       <nav class="text-sm text-[var(--color-ink-soft)] mb-8" aria-label="Breadcrumb">
-        <a href="/treatments" class="link-underline">Treatments</a> <span class="text-[var(--color-champagne-deep)]">›</span> <span class="text-[var(--color-aubergine)]">{division.name}</span>
+        <a href="/treatments" class="link-underline">Treatments</a> <span class="text-[var(--color-gold-deep)]">›</span> <span class="text-[var(--color-magenta)]">{division.name}</span>
       </nav>
       <div class="grid md:grid-cols-2 gap-5" data-stagger>
         {division.treatments.map((t) => (
           <a href={`/treatments/${division.slug}/${t.slug}`} class="group rounded-3xl bg-[var(--color-paper)] ring-line p-7 hover:shadow-[var(--shadow-lift)] transition-all" data-tilt="2">
             <div class="flex items-start justify-between gap-4">
               <div>
-                <span class="eyebrow text-[var(--color-champagne-deep)] text-[0.6rem]">{t.korean ? "Korean technique" : division.tag}</span>
-                <h2 class="mt-1.5 font-display text-2xl font-bold text-[var(--color-aubergine)] group-hover:text-[var(--color-champagne-deep)] transition-colors">{t.name}</h2>
+                <span class="eyebrow text-[var(--color-gold-deep)] text-[0.6rem]">{t.korean ? "Korean technique" : division.tag}</span>
+                <h2 class="mt-1.5 font-display text-2xl font-bold text-[var(--color-magenta)] group-hover:text-[var(--color-gold-deep)] transition-colors">{t.name}</h2>
               </div>
-              <span class="font-display text-3xl text-[var(--color-champagne)]">{division.glyph}</span>
+              <span class="font-display text-3xl text-[var(--color-gold)]">{division.glyph}</span>
             </div>
             <p class="mt-2 text-[var(--color-ink-soft)] leading-relaxed text-pretty">{t.summary}</p>
             <div class="mt-5 flex items-center justify-between text-sm border-t border-[var(--color-line)] pt-4">
               <span class="text-[var(--color-ink-soft)]">{t.sessions}</span>
-              <span class="font-semibold text-[var(--color-aubergine)]">{t.priceFrom ? `from ${peso(t.priceFrom)}` : "Priced at consultation"}</span>
+              <span class="font-semibold text-[var(--color-magenta)]">{t.priceFrom ? `from ${peso(t.priceFrom)}` : "Priced at consultation"}</span>
             </div>
           </a>
         ))}

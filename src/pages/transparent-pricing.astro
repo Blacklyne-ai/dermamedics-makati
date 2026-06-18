@@ -15,8 +15,8 @@ const priced = divisions
   .filter((g) => g.rows.length > 0);
 ---
 <Base
-  title="Transparent Pricing - Dermamedics Makati"
-  description="Honest, indicative pricing for doctor-led aesthetic treatments at Dermamedics. We show you the price before you're on the table - your exact written quote is given free at consultation."
+  title="Transparent Pricing - DermaMedics Makati"
+  description="Honest, indicative pricing for doctor-led aesthetic treatments at DermaMedics. We show you the price before you're on the table - your exact written quote is given free at consultation."
   path="/transparent-pricing"
 >
   <PageHero
@@ -30,7 +30,7 @@ const priced = divisions
   <section class="py-16 sm:py-20 bg-[var(--color-cream)]">
     <div class="mx-auto max-w-3xl px-5 sm:px-8 text-center">
       <p class="text-lg text-[var(--color-ink-soft)] leading-relaxed text-pretty" data-reveal>
-        Aesthetic treatments are planned per person - the number of sessions, areas and products differs from patient to patient. A single fixed price list would be dishonest. So we publish honest indicative ranges below, then give you a precise, written quote tailored to you. <strong class="text-[var(--color-aubergine)]">No hidden fees. No pressure. No surprises.</strong>
+        Aesthetic treatments are planned per person - the number of sessions, areas and products differs from patient to patient. A single fixed price list would be dishonest. So we publish honest indicative ranges below, then give you a precise, written quote tailored to you. <strong class="text-[var(--color-magenta)]">No hidden fees. No pressure. No surprises.</strong>
       </p>
     </div>
   </section>
@@ -40,38 +40,38 @@ const priced = divisions
     <div class="mx-auto max-w-4xl px-5 sm:px-8 space-y-8" data-stagger>
       {priced.map((g) => (
         <div class="rounded-3xl bg-[var(--color-paper)] ring-line overflow-hidden">
-          <div class="flex items-center justify-between px-6 py-4 bg-[var(--color-aubergine)] text-cream">
+          <div class="flex items-center justify-between px-6 py-4 bg-[var(--color-magenta)] text-cream">
             <h2 class="font-display text-xl font-bold">{g.division.name}</h2>
-            <span class="font-display text-2xl text-champagne">{g.division.glyph}</span>
+            <span class="font-display text-2xl text-gold">{g.division.glyph}</span>
           </div>
           <div class="divide-y divide-[var(--color-line)]">
             {g.rows.map((t) => (
-              <a href={`/treatments/${g.division.slug}/${t.slug}`} class="flex items-center justify-between gap-4 px-6 py-4 hover:bg-[var(--color-champagne)]/8 transition-colors">
+              <a href={`/treatments/${g.division.slug}/${t.slug}`} class="flex items-center justify-between gap-4 px-6 py-4 hover:bg-[var(--color-gold)]/8 transition-colors">
                 <span>
-                  <span class="font-medium text-[var(--color-aubergine)]">{t.korean ? "◆ " : ""}{t.name}</span>
+                  <span class="font-medium text-[var(--color-magenta)]">{t.korean ? "◆ " : ""}{t.name}</span>
                   <span class="block text-xs text-[var(--color-ink-soft)]">{t.priceNote}</span>
                 </span>
-                <span class="font-display font-bold text-[var(--color-aubergine)] whitespace-nowrap">from {peso(t.priceFrom!)}</span>
+                <span class="font-display font-bold text-[var(--color-magenta)] whitespace-nowrap">from {peso(t.priceFrom!)}</span>
               </a>
             ))}
           </div>
         </div>
       ))}
 
-      <div class="rounded-3xl mesh-aubergine grain text-cream p-7 sm:p-8 relative overflow-hidden">
+      <div class="rounded-3xl mesh-magenta grain text-cream p-7 sm:p-8 relative overflow-hidden">
         <div class="relative z-10">
-          <p class="eyebrow text-champagne-soft text-[0.62rem]">Everything else</p>
+          <p class="eyebrow text-gold-soft text-[0.62rem]">Everything else</p>
           <h2 class="mt-2 font-display text-2xl font-bold">HIFU, Mesolipo, Thermage, threads, lasers, IV drips &amp; more</h2>
           <p class="mt-3 text-cream/85 leading-relaxed text-pretty">These are planned entirely around you - area, course length and goals all change the cost, so an honest figure only exists once a doctor has assessed you. That assessment is free, and you'll leave knowing the exact price. No obligation to book.</p>
           <div class="mt-6 flex flex-wrap gap-3">
-            <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-champagne text-sm">Ask for a quote on Messenger</a>
+            <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-gold text-sm">Ask for a quote on Messenger</a>
             <a href="/treatment-discovery-quiz" class="btn btn-ghost-light text-sm">Take the quiz first</a>
           </div>
         </div>
       </div>
     </div>
     <p class="mx-auto max-w-4xl px-5 sm:px-8 mt-6 text-xs text-[var(--color-ink-soft)]">
-      All figures above are indicative starting points to give you a realistic sense of cost, not fixed quotes. Your exact, written price is confirmed free at consultation. Prices may be updated; promotional rates are announced on our <a href={business.facebook} target="_blank" rel="noopener" class="underline text-[var(--color-champagne-deep)]">Facebook page</a>.
+      All figures above are indicative starting points to give you a realistic sense of cost, not fixed quotes. Your exact, written price is confirmed free at consultation. Prices may be updated; promotional rates are announced on our <a href={business.facebook} target="_blank" rel="noopener" class="underline text-[var(--color-gold-deep)]">Facebook page</a>.
     </p>
   </section>
 

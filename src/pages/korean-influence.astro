@@ -20,8 +20,8 @@ const principles = [
 ];
 ---
 <Base
-  title="The Korean Influence - Dermamedics Makati"
-  description="Why 'Korean-influenced' is a method, not a buzzword: Korean fillers, Mesolipo, PDO threads, Ultraformer HIFU and the principles behind the natural Korean glow at Dermamedics."
+  title="The Korean Influence - DermaMedics Makati"
+  description="Why 'Korean-influenced' is a method, not a buzzword: Korean fillers, Mesolipo, PDO threads, Ultraformer HIFU and the principles behind the natural Korean glow at DermaMedics."
   path="/korean-influence"
 >
   <PageHero
@@ -33,8 +33,8 @@ const principles = [
 
   <section class="py-16 sm:py-24 bg-[var(--color-cream)]">
     <div class="mx-auto max-w-3xl px-5 sm:px-8">
-      <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>The philosophy</p>
-      <h2 class="mt-4 font-display font-bold leading-[1.06] text-[clamp(1.9rem,4vw,3rem)] text-[var(--color-aubergine)]" data-reveal>
+      <p class="eyebrow text-[var(--color-gold-deep)]" data-reveal>The philosophy</p>
+      <h2 class="mt-4 font-display font-bold leading-[1.06] text-[clamp(1.9rem,4vw,3rem)] text-[var(--color-magenta)]" data-reveal>
         Korean aesthetics is built on <span class="italic font-normal">restraint.</span>
       </h2>
       <p class="mt-6 text-lg text-[var(--color-ink-soft)] leading-relaxed text-pretty" data-reveal>
@@ -46,8 +46,8 @@ const principles = [
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" data-stagger>
         {principles.map((p, i) => (
           <div class="rounded-3xl bg-[var(--color-paper)] ring-line p-6 hover:shadow-[var(--shadow-lift)] transition-all" data-tilt="2">
-            <span class="font-display text-2xl font-bold text-[var(--color-champagne)]">{String(i + 1).padStart(2, "0")}</span>
-            <h3 class="mt-2 font-display text-lg font-bold text-[var(--color-aubergine)]">{p.t}</h3>
+            <span class="font-display text-2xl font-bold text-[var(--color-gold)]">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="mt-2 font-display text-lg font-bold text-[var(--color-magenta)]">{p.t}</h3>
             <p class="mt-2 text-sm text-[var(--color-ink-soft)] leading-snug">{p.d}</p>
           </div>
         ))}
@@ -60,20 +60,20 @@ const principles = [
   <section class="py-20 sm:py-28 bg-[var(--color-paper)]">
     <div class="mx-auto max-w-7xl px-5 sm:px-8">
       <div class="max-w-2xl mb-12">
-        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>The techniques</p>
-        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-aubergine)]" data-reveal>The Korean toolkit, explained.</h2>
+        <p class="eyebrow text-[var(--color-gold-deep)]" data-reveal>The techniques</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4.5vw,3.4rem)] text-[var(--color-magenta)]" data-reveal>The Korean toolkit, explained.</h2>
       </div>
       <div class="space-y-4" data-stagger>
         {methods.map((m, i) => (
           <a href={m.slug} class="group grid sm:grid-cols-12 gap-4 sm:gap-8 items-center rounded-3xl bg-[var(--color-cream)] ring-line p-7 hover:shadow-[var(--shadow-lift)] transition-all">
-            <div class="sm:col-span-1 font-display text-3xl font-bold text-[var(--color-champagne)]">{String(i + 1).padStart(2, "0")}</div>
+            <div class="sm:col-span-1 font-display text-3xl font-bold text-[var(--color-gold)]">{String(i + 1).padStart(2, "0")}</div>
             <div class="sm:col-span-3">
-              <h3 class="font-display text-2xl font-bold text-[var(--color-aubergine)] group-hover:text-[var(--color-champagne-deep)] transition-colors">{m.t}</h3>
+              <h3 class="font-display text-2xl font-bold text-[var(--color-magenta)] group-hover:text-[var(--color-gold-deep)] transition-colors">{m.t}</h3>
             </div>
             <div class="sm:col-span-7">
               <p class="text-[var(--color-ink-soft)] leading-relaxed text-pretty">{m.d}</p>
             </div>
-            <div class="sm:col-span-1 text-right text-[var(--color-champagne-deep)] text-xl transition-transform group-hover:translate-x-1">→</div>
+            <div class="sm:col-span-1 text-right text-[var(--color-gold-deep)] text-xl transition-transform group-hover:translate-x-1">→</div>
           </a>
         ))}
       </div>

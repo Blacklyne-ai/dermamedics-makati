@@ -9,11 +9,11 @@ interface Props {
 const { eyebrow, title, titleAccent, lead, align = "left" } = Astro.props;
 const center = align === "center";
 ---
-<section class="relative mesh-aubergine grain text-cream overflow-hidden">
+<section class="relative mesh-magenta grain text-cream overflow-hidden">
   <div class={`relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-36 pb-16 sm:pt-44 sm:pb-20 ${center ? "text-center" : ""}`}>
-    <p class={`eyebrow text-champagne-soft ${center ? "" : ""}`} data-reveal>{eyebrow}</p>
+    <p class={`eyebrow text-gold-soft ${center ? "" : ""}`} data-reveal>{eyebrow}</p>
     <h1 class={`mt-5 font-display font-bold leading-[1.04] text-balance text-[clamp(2.6rem,6vw,4.8rem)] ${center ? "mx-auto max-w-4xl" : "max-w-4xl"}`} data-reveal>
-      {title}{titleAccent && <span class="block font-normal italic text-champagne-soft">{titleAccent}</span>}
+      {title}{titleAccent && <span class="block font-normal italic text-gold-soft">{titleAccent}</span>}
     </h1>
     {lead && (
       <p class={`mt-6 text-lg leading-relaxed text-cream/80 text-pretty ${center ? "mx-auto max-w-2xl" : "max-w-2xl"}`} data-reveal>{lead}</p>

@@ -7,23 +7,23 @@ const { doctor } = Astro.props;
 const initials = doctor.name.replace("Dr. ", "").split(" ").map((w) => w[0]).slice(0, 2).join("");
 ---
 <article class="group rounded-3xl overflow-hidden ring-line bg-[var(--color-paper)] shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-lift)] transition-all" data-tilt="3">
-  <div class="relative aspect-[4/5] flex items-center justify-center overflow-hidden" style="background:linear-gradient(150deg,#5a3c50,#2a1925)">
-    <span class="font-display text-7xl font-bold text-champagne/90">{initials}</span>
-    <span class="absolute top-4 left-4 text-[10px] uppercase tracking-[0.2em] text-cream/55 bg-[#2a1925]/40 rounded-full px-2.5 py-1">{doctor.branch}</span>
+  <div class="relative aspect-[4/5] flex items-center justify-center overflow-hidden" style="background:linear-gradient(150deg,#8e0456,#4a0329)">
+    <span class="font-display text-7xl font-bold text-gold/90">{initials}</span>
+    <span class="absolute top-4 left-4 text-[10px] uppercase tracking-[0.2em] text-cream/55 bg-[#4a0329]/40 rounded-full px-2.5 py-1">{doctor.branch}</span>
     <span class="absolute bottom-3 right-4 text-[10px] text-cream/45">portrait to follow</span>
   </div>
   <div class="p-6">
-    <p class="eyebrow text-[var(--color-champagne-deep)] text-[0.62rem]">{doctor.title}</p>
-    <h3 class="mt-1.5 font-display text-2xl font-bold text-[var(--color-aubergine)]">{doctor.name}</h3>
+    <p class="eyebrow text-[var(--color-gold-deep)] text-[0.62rem]">{doctor.title}</p>
+    <h3 class="mt-1.5 font-display text-2xl font-bold text-[var(--color-magenta)]">{doctor.name}</h3>
     <p class="mt-2.5 text-sm text-[var(--color-ink-soft)] leading-relaxed">{doctor.blurb}</p>
     <div class="mt-4 flex flex-wrap gap-1.5">
       {doctor.specialisms.map((s) => (
-        <span class="text-xs rounded-full bg-[var(--color-champagne)]/15 text-[var(--color-aubergine)] px-2.5 py-1">{s}</span>
+        <span class="text-xs rounded-full bg-[var(--color-gold)]/15 text-[var(--color-magenta)] px-2.5 py-1">{s}</span>
       ))}
     </div>
     <div class="mt-5 flex items-center gap-4">
-      <a href={`/doctors/${doctor.slug}`} class="link-underline text-sm font-semibold text-[var(--color-aubergine)]">Full profile</a>
-      <a href={business.messenger} target="_blank" rel="noopener" class="link-underline text-sm font-semibold text-[var(--color-champagne-deep)]">Book a consultation →</a>
+      <a href={`/doctors/${doctor.slug}`} class="link-underline text-sm font-semibold text-[var(--color-magenta)]">Full profile</a>
+      <a href={business.messenger} target="_blank" rel="noopener" class="link-underline text-sm font-semibold text-[var(--color-gold-deep)]">Book a consultation →</a>
     </div>
   </div>
 </article>

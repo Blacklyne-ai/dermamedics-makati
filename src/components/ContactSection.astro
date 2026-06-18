@@ -5,8 +5,8 @@ import { business, branches } from "../data/site";
   <div class="mx-auto max-w-7xl px-5 sm:px-8">
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
       <div>
-        <p class="eyebrow text-[var(--color-champagne-deep)]" data-reveal>Find us · {business.building}</p>
-        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4vw,3.2rem)] text-[var(--color-aubergine)]" data-reveal>
+        <p class="eyebrow text-[var(--color-gold-deep)]" data-reveal>Find us · {business.building}</p>
+        <h2 class="mt-4 font-display font-bold leading-[1.05] text-[clamp(2rem,4vw,3.2rem)] text-[var(--color-magenta)]" data-reveal>
           Two branches, <span class="italic font-normal">one building.</span>
         </h2>
         <p class="mt-5 text-[var(--color-ink-soft)] max-w-md text-pretty" data-reveal>
@@ -16,12 +16,12 @@ import { business, branches } from "../data/site";
         <div class="mt-8 space-y-6" data-stagger>
           {branches.map((b) => (
             <div class="rounded-2xl bg-[var(--color-paper)] ring-line p-5">
-              <p class="font-display text-xl font-bold text-[var(--color-aubergine)]">{b.name}</p>
+              <p class="font-display text-xl font-bold text-[var(--color-magenta)]">{b.name}</p>
               <ul class="mt-3 space-y-1.5 text-sm text-[var(--color-ink-soft)]">
-                <li class="flex gap-2"><span class="text-[var(--color-champagne-deep)]">›</span><span>{b.addressLine}</span></li>
-                <li class="flex gap-2"><span class="text-[var(--color-champagne-deep)]">›</span><span>{b.cityLine}</span></li>
-                <li class="flex gap-2"><span class="text-[var(--color-champagne-deep)]">›</span><a href={`tel:${b.phoneTel}`} class="link-underline font-semibold text-[var(--color-aubergine)]">{b.phoneDisplay}</a></li>
-                <li class="flex gap-2"><span class="text-[var(--color-champagne-deep)]">›</span><span>Doctors: {b.doctors.join(", ")}</span></li>
+                <li class="flex gap-2"><span class="text-[var(--color-gold-deep)]">›</span><span>{b.addressLine}</span></li>
+                <li class="flex gap-2"><span class="text-[var(--color-gold-deep)]">›</span><span>{b.cityLine}</span></li>
+                <li class="flex gap-2"><span class="text-[var(--color-gold-deep)]">›</span><a href={`tel:${b.phoneTel}`} class="link-underline font-semibold text-[var(--color-magenta)]">{b.phoneDisplay}</a></li>
+                <li class="flex gap-2"><span class="text-[var(--color-gold-deep)]">›</span><span>Doctors: {b.doctors.join(", ")}</span></li>
               </ul>
             </div>
           ))}

@@ -7,8 +7,8 @@ import { divisions } from "../../data/treatments";
 const total = divisions.reduce((n, d) => n + d.treatments.length, 0);
 ---
 <Base
-  title="Treatments - Dermamedics Makati"
-  description="The full Dermamedics treatment menu: aesthetic medicine, body slimming, anti-ageing, skin brightening, acne, IV drips, lasers and tattoo removal. Doctor-led, Korean-influenced, transparently priced."
+  title="Treatments - DermaMedics Makati"
+  description="The full DermaMedics treatment menu: aesthetic medicine, body slimming, anti-ageing, skin brightening, acne, IV drips, lasers and tattoo removal. Doctor-led, Korean-influenced, transparently priced."
   path="/treatments"
 >
   <PageHero
@@ -23,21 +23,21 @@ const total = divisions.reduce((n, d) => n + d.treatments.length, 0);
       {divisions.map((d) => (
         <div class="rounded-[2rem] ring-line bg-[var(--color-paper)] overflow-hidden hover:shadow-[var(--shadow-lift)] transition-all">
           <div class="grid lg:grid-cols-12">
-            <a href={`/treatments/${d.slug}`} class="lg:col-span-4 group relative mesh-aubergine grain text-cream p-8 flex flex-col justify-between min-h-[200px]">
+            <a href={`/treatments/${d.slug}`} class="lg:col-span-4 group relative mesh-magenta grain text-cream p-8 flex flex-col justify-between min-h-[200px]">
               <div class="relative z-10 flex items-start justify-between">
-                <span class="eyebrow text-champagne-soft text-[0.62rem]">{d.number} · {d.tag}</span>
-                <span class="font-display text-4xl text-champagne">{d.glyph}</span>
+                <span class="eyebrow text-gold-soft text-[0.62rem]">{d.number} · {d.tag}</span>
+                <span class="font-display text-4xl text-gold">{d.glyph}</span>
               </div>
               <div class="relative z-10">
                 <h2 class="font-display text-3xl font-bold">{d.name}</h2>
-                <span class="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-champagne-soft">Explore division <span class="transition-transform group-hover:translate-x-1">→</span></span>
+                <span class="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-soft">Explore division <span class="transition-transform group-hover:translate-x-1">→</span></span>
               </div>
             </a>
             <div class="lg:col-span-8 p-8">
               <p class="text-[var(--color-ink-soft)] text-pretty">{d.intro}</p>
               <div class="mt-5 flex flex-wrap gap-2">
                 {d.treatments.map((t) => (
-                  <a href={`/treatments/${d.slug}/${t.slug}`} class="text-sm rounded-full ring-1 ring-[var(--color-line)] hover:ring-[var(--color-champagne)] hover:bg-[var(--color-champagne)]/10 px-3.5 py-1.5 text-[var(--color-aubergine)] transition-all">
+                  <a href={`/treatments/${d.slug}/${t.slug}`} class="text-sm rounded-full ring-1 ring-[var(--color-line)] hover:ring-[var(--color-gold)] hover:bg-[var(--color-gold)]/10 px-3.5 py-1.5 text-[var(--color-magenta)] transition-all">
                     {t.korean ? "◆ " : ""}{t.name}
                   </a>
                 ))}

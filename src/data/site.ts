@@ -1,13 +1,14 @@
 // ---------------------------------------------------------------------------
-// Dermamedics Makati - single source of truth for business facts.
+// DermaMedics Makati - single source of truth for business facts.
 // Only verified / client-supplied facts live here. Anything unconfirmed is
 // either omitted or marked. No fabricated licence numbers or prices.
 // ---------------------------------------------------------------------------
 
 export const business = {
-  name: "Dermamedics",
-  legalName: "Dermamedics Skin Center",
+  name: "DermaMedics",
+  legalName: "DermaMedics Skin & Cosmetic Surgery Clinic",
   tagline: "Elevating Beauty Since 2010",
+  subtitle: "Skin & Cosmetic Surgery Clinic",
   founded: 2010,
   yearsLabel: "15 years",
   building: "Centuria Medical Makati",
@@ -166,7 +167,7 @@ export const nav: NavItem[] = [
     label: "Clinic",
     href: "/about",
     children: [
-      { label: "About Dermamedics", href: "/about" },
+      { label: "About DermaMedics", href: "/about" },
       { label: "Our Doctors", href: "/doctors" },
       { label: "Two Branches", href: "/branches" },
       { label: "Korean Influence", href: "/korean-influence" },

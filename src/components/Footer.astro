@@ -5,7 +5,7 @@ import { manilaDate } from "../data/site";
 const year = new Date().getFullYear();
 const updated = manilaDate();
 ---
-<footer class="relative mesh-aubergine grain text-cream overflow-hidden">
+<footer class="relative mesh-magenta grain text-cream overflow-hidden">
   <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-20 pb-10">
     <div class="grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-4">
@@ -14,48 +14,48 @@ const updated = manilaDate();
           Doctor-led, Korean-influenced aesthetic medicine inside {business.building} - Manila's premier medical building in Century City. Transparent pricing, fifteen years running.
         </p>
         <div class="mt-6 flex gap-3">
-          <a href={business.messenger} target="_blank" rel="noopener" class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/15 hover:border-champagne hover:bg-white/5 transition-colors" aria-label="Message us on Messenger">
+          <a href={business.messenger} target="_blank" rel="noopener" class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/15 hover:border-gold hover:bg-white/5 transition-colors" aria-label="Message us on Messenger">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.4 2 2 6.2 2 11.7c0 3.1 1.4 5.9 3.7 7.7V23l3.4-1.9c.9.3 1.9.4 2.9.4 5.6 0 10-4.2 10-9.7S17.6 2 12 2zm1 13.1l-2.5-2.7-4.9 2.7L11 9.2l2.6 2.7 4.8-2.7L13 15.1z"/></svg>
           </a>
-          <a href={business.instagram} target="_blank" rel="noopener" class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/15 hover:border-champagne hover:bg-white/5 transition-colors" aria-label="Instagram">
+          <a href={business.instagram} target="_blank" rel="noopener" class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/15 hover:border-gold hover:bg-white/5 transition-colors" aria-label="Instagram">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
           </a>
-          <a href={business.facebook} target="_blank" rel="noopener" class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/15 hover:border-champagne hover:bg-white/5 transition-colors" aria-label="Facebook">
+          <a href={business.facebook} target="_blank" rel="noopener" class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/15 hover:border-gold hover:bg-white/5 transition-colors" aria-label="Facebook">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z"/></svg>
           </a>
         </div>
       </div>
 
       <div class="lg:col-span-3">
-        <h3 class="eyebrow text-champagne-soft mb-4">Treatments</h3>
+        <h3 class="eyebrow text-gold-soft mb-4">Treatments</h3>
         <ul class="space-y-2.5 text-sm text-cream/75">
           {nav[0].children!.map((c) => (
-            <li><a href={c.href} class="hover:text-champagne transition-colors">{c.label}</a></li>
+            <li><a href={c.href} class="hover:text-gold transition-colors">{c.label}</a></li>
           ))}
         </ul>
       </div>
 
       <div class="lg:col-span-2">
-        <h3 class="eyebrow text-champagne-soft mb-4">Clinic</h3>
+        <h3 class="eyebrow text-gold-soft mb-4">Clinic</h3>
         <ul class="space-y-2.5 text-sm text-cream/75">
-          <li><a href="/about" class="hover:text-champagne transition-colors">About</a></li>
-          <li><a href="/doctors" class="hover:text-champagne transition-colors">Our doctors</a></li>
-          <li><a href="/transparent-pricing" class="hover:text-champagne transition-colors">Transparent pricing</a></li>
-          <li><a href="/korean-influence" class="hover:text-champagne transition-colors">Korean influence</a></li>
-          <li><a href="/before-after-gallery" class="hover:text-champagne transition-colors">Results gallery</a></li>
-          <li><a href="/reviews" class="hover:text-champagne transition-colors">Reviews</a></li>
-          <li><a href="/faq" class="hover:text-champagne transition-colors">FAQ</a></li>
+          <li><a href="/about" class="hover:text-gold transition-colors">About</a></li>
+          <li><a href="/doctors" class="hover:text-gold transition-colors">Our doctors</a></li>
+          <li><a href="/transparent-pricing" class="hover:text-gold transition-colors">Transparent pricing</a></li>
+          <li><a href="/korean-influence" class="hover:text-gold transition-colors">Korean influence</a></li>
+          <li><a href="/before-after-gallery" class="hover:text-gold transition-colors">Results gallery</a></li>
+          <li><a href="/reviews" class="hover:text-gold transition-colors">Reviews</a></li>
+          <li><a href="/faq" class="hover:text-gold transition-colors">FAQ</a></li>
         </ul>
       </div>
 
       <div class="lg:col-span-3">
-        <h3 class="eyebrow text-champagne-soft mb-4">Two Branches</h3>
+        <h3 class="eyebrow text-gold-soft mb-4">Two Branches</h3>
         <ul class="space-y-4 text-sm text-cream/75">
           {branches.map((b) => (
             <li>
               <p class="font-semibold text-cream">{b.name}</p>
               <p>{b.addressLine}</p>
-              <a href={`tel:${b.phoneTel}`} class="hover:text-champagne transition-colors">{b.phoneDisplay}</a>
+              <a href={`tel:${b.phoneTel}`} class="hover:text-gold transition-colors">{b.phoneDisplay}</a>
             </li>
           ))}
           <li class="pt-1">{business.hours}</li>
@@ -66,9 +66,9 @@ const updated = manilaDate();
     <div class="mt-14 pt-7 border-t border-white/12 flex flex-col md:flex-row gap-4 md:items-center md:justify-between text-xs text-cream/55">
       <p>© {year} {business.legalName}. {business.building}, Makati City. All rights reserved.</p>
       <div class="flex flex-wrap gap-x-5 gap-y-2">
-        <a href="/privacy-policy" class="hover:text-champagne transition-colors">Privacy Policy</a>
-        <a href="/terms" class="hover:text-champagne transition-colors">Terms</a>
-        <a href="/contact" class="hover:text-champagne transition-colors">Contact</a>
+        <a href="/privacy-policy" class="hover:text-gold transition-colors">Privacy Policy</a>
+        <a href="/terms" class="hover:text-gold transition-colors">Terms</a>
+        <a href="/contact" class="hover:text-gold transition-colors">Contact</a>
         <span>Updated {updated}</span>
       </div>
     </div>

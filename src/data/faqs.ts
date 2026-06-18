@@ -32,7 +32,7 @@ export const faqs: Faq[] = [
   },
   {
     group: "safety",
-    q: "Is Dermamedics a licensed medical clinic?",
+    q: "Is DermaMedics a licensed medical clinic?",
     a: "Yes. We are an established clinic inside Centuria Medical Makati, one of the city's premier medical buildings, listed on its official directory. Our physicians are PRC-licensed and verifiable through the PRC online registry. Clinic licensing details are available on request.",
   },
   {

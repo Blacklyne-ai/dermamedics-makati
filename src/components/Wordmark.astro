@@ -1,20 +1,22 @@
 ---
+// DermaMedics wordmark — gold "DermaMedics" + "SKIN & COSMETIC SURGERY CLINIC".
+// Drop the real logo PNG at /public/photos/logo.png (transparent) to swap the
+// text wordmark for the official artwork.
 interface Props {
   light?: boolean;
   withTagline?: boolean;
   class?: string;
 }
 const { light = false, withTagline = true, class: cls = "" } = Astro.props;
-const ink = light ? "var(--color-cream)" : "var(--color-aubergine)";
-const sub = light ? "rgba(244,239,232,0.7)" : "var(--color-ink-soft)";
+const sub = light ? "var(--color-gold-soft)" : "var(--color-gold-deep)";
 ---
-<span class={`inline-flex flex-col leading-none ${cls}`} aria-label="Dermamedics - Elevating Beauty Since 2010">
-  <span class="font-display font-bold tracking-tight" style={`font-size:1.45rem;color:${ink}`}>
-    <span style="color:var(--color-champagne-deep)">D</span>ermamedics
+<span class={`inline-flex flex-col leading-none ${cls}`} aria-label="DermaMedics — Skin & Cosmetic Surgery Clinic">
+  <span class="font-display font-bold tracking-tight text-gold-grad" style="font-size:1.55rem;line-height:1">
+    DermaMedics
   </span>
   {withTagline && (
-    <span class="eyebrow" style={`font-size:0.5rem;letter-spacing:0.28em;margin-top:0.28rem;color:${sub}`}>
-      Elevating Beauty Since 2010
+    <span class="eyebrow" style={`font-size:0.46rem;letter-spacing:0.24em;margin-top:0.3rem;color:${sub}`}>
+      Skin &amp; Cosmetic Surgery Clinic
     </span>
   )}
 </span>

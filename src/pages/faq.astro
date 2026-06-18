@@ -24,8 +24,8 @@ const faqSchema = {
 };
 ---
 <Base
-  title="FAQ - Dermamedics Makati"
-  description="Honest answers on pricing transparency, Korean-influenced methodology, treatment safety, doctor-led care and booking at Dermamedics, Centuria Medical Makati."
+  title="FAQ - DermaMedics Makati"
+  description="Honest answers on pricing transparency, Korean-influenced methodology, treatment safety, doctor-led care and booking at DermaMedics, Centuria Medical Makati."
   path="/faq"
 >
   <PageHero
@@ -41,7 +41,7 @@ const faqSchema = {
         const items = faqs.filter((f) => f.group === g.key);
         return (
           <div data-reveal>
-            <h2 class="font-display text-2xl font-bold text-[var(--color-aubergine)] mb-5">{g.label}</h2>
+            <h2 class="font-display text-2xl font-bold text-[var(--color-magenta)] mb-5">{g.label}</h2>
             <FaqAccordion items={items} />
           </div>
         );

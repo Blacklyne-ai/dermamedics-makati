@@ -18,15 +18,15 @@ const bring = [
 ];
 ---
 <Base
-  title="Your First Visit - Dermamedics Makati"
-  description="What to expect at your free aesthetic-doctor consultation at Dermamedics: an honest assessment, a tailored plan, and transparent pricing before anything begins."
+  title="Your First Visit - DermaMedics Makati"
+  description="What to expect at your free aesthetic-doctor consultation at DermaMedics: an honest assessment, a tailored plan, and transparent pricing before anything begins."
   path="/first-visit"
 >
   <PageHero
     eyebrow="Free consultation · No obligation"
     title="What to expect"
     titleAccent="on your first visit."
-    lead="If you've never had aesthetic treatment before, the first step is the one that matters most - and at Dermamedics it's free, unhurried, and honest from the start."
+    lead="If you've never had aesthetic treatment before, the first step is the one that matters most - and at DermaMedics it's free, unhurried, and honest from the start."
   />
 
   <section class="py-16 sm:py-24 bg-[var(--color-cream)]">
@@ -34,9 +34,9 @@ const bring = [
       <div class="space-y-4" data-stagger>
         {steps.map((s) => (
           <div class="grid sm:grid-cols-12 gap-4 sm:gap-8 items-start rounded-3xl bg-[var(--color-paper)] ring-line p-7 sm:p-8">
-            <div class="sm:col-span-2 font-display text-4xl font-bold text-[var(--color-champagne)]">{s.n}</div>
+            <div class="sm:col-span-2 font-display text-4xl font-bold text-[var(--color-gold)]">{s.n}</div>
             <div class="sm:col-span-10">
-              <h2 class="font-display text-2xl font-bold text-[var(--color-aubergine)]">{s.t}</h2>
+              <h2 class="font-display text-2xl font-bold text-[var(--color-magenta)]">{s.t}</h2>
               <p class="mt-2 text-[var(--color-ink-soft)] leading-relaxed text-pretty">{s.d}</p>
             </div>
           </div>
@@ -45,23 +45,23 @@ const bring = [
 
       <div class="mt-12 grid lg:grid-cols-2 gap-6">
         <div class="rounded-3xl bg-[var(--color-paper)] ring-line p-7" data-reveal>
-          <p class="eyebrow text-[var(--color-champagne-deep)] text-[0.62rem]">Helpful to bring</p>
+          <p class="eyebrow text-[var(--color-gold-deep)] text-[0.62rem]">Helpful to bring</p>
           <ul class="mt-4 space-y-2.5 text-[var(--color-ink-soft)]">
             {bring.map((b) => (
-              <li class="flex gap-3"><span class="text-[var(--color-champagne-deep)]">✓</span> {b}</li>
+              <li class="flex gap-3"><span class="text-[var(--color-gold-deep)]">✓</span> {b}</li>
             ))}
           </ul>
         </div>
-        <div class="rounded-3xl mesh-aubergine grain text-cream p-7 relative overflow-hidden" data-reveal="right">
+        <div class="rounded-3xl mesh-magenta grain text-cream p-7 relative overflow-hidden" data-reveal="right">
           <div class="relative z-10">
-            <p class="eyebrow text-champagne-soft text-[0.62rem]">Good to know</p>
+            <p class="eyebrow text-gold-soft text-[0.62rem]">Good to know</p>
             <ul class="mt-4 space-y-2.5 text-cream/85 text-sm">
-              <li class="flex gap-2.5"><span class="text-champagne">›</span> Both branches open {business.hoursShort}, daily</li>
-              <li class="flex gap-2.5"><span class="text-champagne">›</span> Walk-ins accommodated, but booking means no waiting</li>
-              <li class="flex gap-2.5"><span class="text-champagne">›</span> Inside {business.building}, Century City</li>
-              <li class="flex gap-2.5"><span class="text-champagne">›</span> Health information handled under RA 10173</li>
+              <li class="flex gap-2.5"><span class="text-gold">›</span> Both branches open {business.hoursShort}, daily</li>
+              <li class="flex gap-2.5"><span class="text-gold">›</span> Walk-ins accommodated, but booking means no waiting</li>
+              <li class="flex gap-2.5"><span class="text-gold">›</span> Inside {business.building}, Century City</li>
+              <li class="flex gap-2.5"><span class="text-gold">›</span> Health information handled under RA 10173</li>
             </ul>
-            <a href="/treatment-discovery-quiz" class="btn btn-champagne w-full mt-6 text-sm">Take the quiz before you come</a>
+            <a href="/treatment-discovery-quiz" class="btn btn-gold w-full mt-6 text-sm">Take the quiz before you come</a>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { business, nav } from "../data/site";
   <div class="glass border-b border-[var(--color-line)]/60">
     <div class="mx-auto max-w-7xl px-5 sm:px-8">
       <div class="flex items-center justify-between" style="height:var(--header-h)">
-        <a href="/" class="shrink-0" aria-label="Dermamedics home">
+        <a href="/" class="shrink-0" aria-label="DermaMedics home">
           <Wordmark />
         </a>
 
@@ -15,7 +15,7 @@ import { business, nav } from "../data/site";
             <div class="relative group">
               <a
                 href={item.href}
-                class="link-underline text-[0.92rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-aubergine)] transition-colors py-2 inline-flex items-center gap-1"
+                class="link-underline text-[0.92rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-magenta)] transition-colors py-2 inline-flex items-center gap-1"
               >
                 {item.label}
                 {item.children && (
@@ -26,7 +26,7 @@ import { business, nav } from "../data/site";
                 <div class="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
                   <div class="glass rounded-2xl p-2 w-64 shadow-[var(--shadow-lift)]">
                     {item.children.map((c) => (
-                      <a href={c.href} class="block px-4 py-2.5 rounded-xl text-sm text-[var(--color-ink-soft)] hover:text-[var(--color-aubergine)] hover:bg-[var(--color-champagne)]/15 transition-colors">
+                      <a href={c.href} class="block px-4 py-2.5 rounded-xl text-sm text-[var(--color-ink-soft)] hover:text-[var(--color-magenta)] hover:bg-[var(--color-gold)]/15 transition-colors">
                         {c.label}
                       </a>
                     ))}
@@ -38,13 +38,13 @@ import { business, nav } from "../data/site";
         </nav>
 
         <div class="hidden lg:flex items-center gap-3">
-          <a href={`tel:${business.phonePrimaryTel}`} class="text-sm font-semibold text-[var(--color-aubergine)] hover:text-[var(--color-champagne-deep)] transition-colors">
+          <a href={`tel:${business.phonePrimaryTel}`} class="text-sm font-semibold text-[var(--color-magenta)] hover:text-[var(--color-gold-deep)] transition-colors">
             {business.phonePrimaryDisplay}
           </a>
           <a href="/book-free-consultation" class="btn btn-primary text-sm" data-magnetic="0.2">Free consultation</a>
         </div>
 
-        <button id="menu-btn" class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full ring-line text-[var(--color-aubergine)]" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <button id="menu-btn" class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full ring-line text-[var(--color-magenta)]" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </button>
       </div>
@@ -53,7 +53,7 @@ import { business, nav } from "../data/site";
 
   <!-- Mobile menu -->
   <div id="mobile-menu" class="lg:hidden fixed inset-0 z-[60] translate-x-full transition-transform duration-300 ease-out" aria-hidden="true">
-    <div class="absolute inset-0 mesh-aubergine grain"></div>
+    <div class="absolute inset-0 mesh-magenta grain"></div>
     <div class="relative h-full overflow-y-auto px-6 py-5">
       <div class="flex items-center justify-between mb-8" style="height:var(--header-h)">
         <Wordmark light />
@@ -76,7 +76,7 @@ import { business, nav } from "../data/site";
         ))}
       </nav>
       <div class="mt-8 flex flex-col gap-3">
-        <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-champagne w-full">Message us on Messenger</a>
+        <a href={business.messenger} target="_blank" rel="noopener" class="btn btn-gold w-full">Message us on Messenger</a>
         <a href={`tel:${business.phonePrimaryTel}`} class="btn btn-ghost-light w-full">Call {business.phonePrimaryDisplay}</a>
       </div>
     </div>

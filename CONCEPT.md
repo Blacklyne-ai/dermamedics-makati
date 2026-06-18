@@ -147,3 +147,15 @@ Locked palette, justified shade by shade.
 - [x] ONE brand colour (aubergine) + warm surface (cream)
 - [x] Business-specific wow factor (quiz)
 - [x] Editorial Asian-aesthetic tone (not pink salon, not Belo-clinical, not K-pop)
+
+---
+
+## ⚑ BRAND CORRECTION (post-launch, client artwork received)
+
+The locked aubergine/champagne palette in this document was a *positioning* hypothesis (elevate above the "pink salon" norm). The client then supplied their **real brand asset** - a Mega Sale promo showing the actual identity:
+
+- **Real palette: hot magenta `#E10A82` + gold `#D9A53A` + warm cream `#FCF4F4`** (deep magenta `#8E0456` / plum `#4A0329` for dark sections). This now drives the whole site.
+- **Real logo: "DermaMedics" gold wordmark + "Skin & Cosmetic Surgery Clinic"** (note camelCase + the clinic does cosmetic *surgery*, not just skin). Legal name updated accordingly.
+- **Hero now features a K-beauty model photo** (slot at `/photos/hero-model.png`) with a **₱99 "Mega Sale" gold badge** echoing the client's real campaign.
+
+Per the standing rule *"use the client's real brand colours + logo, never invent a palette"* ([[feedback-use-client-brand]]), the real brand overrides the hypothesised one. The execution keeps the 2027-editorial discipline (Bodoni display, gold-on-magenta hierarchy, generous whitespace, glass/grain) so it reads as *premium* magenta+gold, not cheesy salon. Everything else in this concept (archetype, transparent-pricing spine, quiz, honesty constraints) stands.

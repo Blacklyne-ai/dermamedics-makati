@@ -9,12 +9,12 @@ const {
 } = Astro.props;
 const seq = [...items, ...items];
 ---
-<section class={`marquee overflow-hidden border-y ${dark ? "bg-[var(--color-aubergine)] border-white/10" : "bg-[var(--color-paper)] border-[var(--color-line)]"} py-6`}>
+<section class={`marquee overflow-hidden border-y ${dark ? "bg-[var(--color-magenta)] border-white/10" : "bg-[var(--color-paper)] border-[var(--color-line)]"} py-6`}>
   <div class="marquee-track">
     {seq.map((item) => (
       <span class="inline-flex items-center">
-        <span class={`font-display text-xl sm:text-2xl tracking-tight px-6 ${dark ? "text-cream" : "text-[var(--color-aubergine)]"}`}>{item}</span>
-        <span class="text-[var(--color-champagne)] text-lg" aria-hidden="true">◆</span>
+        <span class={`font-display text-xl sm:text-2xl tracking-tight px-6 ${dark ? "text-cream" : "text-[var(--color-magenta)]"}`}>{item}</span>
+        <span class="text-[var(--color-gold)] text-lg" aria-hidden="true">◆</span>
       </span>
     ))}
   </div>

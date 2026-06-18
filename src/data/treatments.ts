@@ -3,10 +3,10 @@
 // individual treatment pages, the home bento, the gallery filter and the
 // Treatment Discovery Quiz.
 //
-// PRICING NOTE: Dermamedics' own confirmed prices were not harvestable. Where a
+// PRICING NOTE: DermaMedics' own confirmed prices were not harvestable. Where a
 // figure appears it is an INDICATIVE Metro-Manila market range, clearly framed
 // as "confirmed at your free consultation" - never presented as an exact
-// Dermamedics rate. `priceRange` is intentionally a soft band, not a quote.
+// DermaMedics rate. `priceRange` is intentionally a soft band, not a quote.
 // ---------------------------------------------------------------------------
 
 export interface Treatment {
@@ -64,7 +64,7 @@ export const divisions: Division[] = [
     glyph: "✦",
     blurb: "Korean fillers, Botox, threads and PRP - all administered by a doctor.",
     intro:
-      "The doctor-led core of Dermamedics. Injectables and minor procedures are performed by a physician, with a conservative hand and a face-first eye for balance - never overfilled, never frozen.",
+      "The doctor-led core of DermaMedics. Injectables and minor procedures are performed by a physician, with a conservative hand and a face-first eye for balance - never overfilled, never frozen.",
     treatments: [
       {
         slug: "korean-fillers",
@@ -529,7 +529,7 @@ export const divisions: Division[] = [
         tagline: "Fading, the right way",
         summary: "Q-switch and Pico laser removal, planned across the sessions your tattoo actually needs.",
         detail:
-          "Laser tattoo removal uses Q-switch and Pico lasers to shatter ink into particles your body clears over time. The number of sessions depends on ink colour, depth, age and your skin - so we assess honestly and plan a multi-session package rather than overpromising a single visit. Listed as a Dermamedics specialty on the official Centuria Medical Makati directory.",
+          "Laser tattoo removal uses Q-switch and Pico lasers to shatter ink into particles your body clears over time. The number of sessions depends on ink colour, depth, age and your skin - so we assess honestly and plan a multi-session package rather than overpromising a single visit. Listed as a DermaMedics specialty on the official Centuria Medical Makati directory.",
         goodFor: ["Unwanted tattoos", "Faded older ink", "Cover-up prep", "Cosmetic tattoo"],
         sessions: "Multi-session package · spaced 6–8 weeks",
         downtime: "Minimal per session",
