@@ -2,7 +2,7 @@
 import Base from "../../../layouts/Base.astro";
 import PageHero from "../../../components/PageHero.astro";
 import ClosingCTA from "../../../components/ClosingCTA.astro";
-import { divisions, peso } from "../../../data/treatments";
+import { divisions, peso, divisionImage } from "../../../data/treatments";
 
 export function getStaticPaths() {
   return divisions.map((d) => ({ params: { division: d.slug }, props: { division: d } }));
@@ -18,6 +18,7 @@ const { division } = Astro.props;
     eyebrow={`Division ${division.number} · ${division.tag}`}
     title={division.name}
     lead={division.intro}
+    image={divisionImage(division.slug)}
   >
     <div class="mt-8 flex flex-wrap gap-3" data-reveal>
       <a href="#treatments" class="btn btn-gold">See the {division.treatments.length} treatments</a>

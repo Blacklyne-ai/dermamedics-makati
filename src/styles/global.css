@@ -214,3 +214,41 @@ html.js .reveal.is-in, html.js [data-reveal].is-in { opacity: 1; transform: none
 
 /* utility for section number watermark */
 .section-num { font-family: var(--font-display); font-weight: 800; line-height: 0.8; color: var(--color-gold); opacity: 0.25; }
+
+/* ---------- Photography treatments ---------- */
+/* wrapper holds the image; overlays tie photos into the magenta/gold brand */
+.photo { position: relative; overflow: hidden; }
+.photo > img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+.photo-zoom:hover > img { transform: scale(1.06); }
+/* subtle magenta wash + grain so off-palette photos read on-brand */
+.photo-tint::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(150deg, rgba(225,10,130,0.18), transparent 45%, rgba(74,3,41,0.35));
+  mix-blend-mode: multiply;
+}
+.photo-duotone > img { filter: saturate(0.85) contrast(1.02); }
+/* dark gradient for text legibility over a photo */
+.photo-scrim::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(to top, rgba(74,3,41,0.92) 0%, rgba(74,3,41,0.45) 38%, transparent 72%);
+}
+/* gold hairline frame */
+.gold-frame { box-shadow: inset 0 0 0 1px rgba(236,199,102,0.5); }
+
+/* ---------- Curved section divider ---------- */
+.curve-top { position: absolute; top: 0; left: 0; width: 100%; height: 60px; transform: translateY(-99%); line-height: 0; pointer-events: none; }
+.curve-top svg { width: 100%; height: 100%; display: block; }
+
+/* ---------- Eyebrow with gold tick ---------- */
+.kicker { display: inline-flex; align-items: center; gap: 0.6rem; }
+.kicker::before { content: ""; width: 1.6rem; height: 1px; background: var(--color-gold); display: inline-block; }
+
+/* ---------- Premium card lift ---------- */
+.card-lux { transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.5s ease; }
+.card-lux:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+
+/* image reveal mask */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .img-reveal { clip-path: inset(0 0 100% 0); transition: clip-path 1s cubic-bezier(0.22,1,0.36,1); }
+  html.js .img-reveal.is-in { clip-path: inset(0 0 0 0); }
+}

@@ -1,17 +1,25 @@
 ---
+import Peony from "./art/Peony.astro";
 interface Props {
   eyebrow: string;
   title: string;
   titleAccent?: string;
   lead?: string;
   align?: "left" | "center";
+  image?: string;
 }
-const { eyebrow, title, titleAccent, lead, align = "left" } = Astro.props;
+const { eyebrow, title, titleAccent, lead, align = "left", image } = Astro.props;
 const center = align === "center";
 ---
 <section class="relative mesh-magenta grain text-cream overflow-hidden">
+  {image && (
+    <div class="absolute inset-0 z-0 opacity-30 mix-blend-soft-light">
+      <img src={image} alt="" class="w-full h-full object-cover" loading="eager" onerror="this.style.display='none'" />
+    </div>
+  )}
+  <Peony class="absolute -top-8 right-4 sm:right-16 w-40 h-40 text-gold-soft/20 z-0 hidden sm:block" />
   <div class={`relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-36 pb-16 sm:pt-44 sm:pb-20 ${center ? "text-center" : ""}`}>
-    <p class={`eyebrow text-gold-soft ${center ? "" : ""}`} data-reveal>{eyebrow}</p>
+    <p class="eyebrow text-gold-soft" data-reveal>{eyebrow}</p>
     <h1 class={`mt-5 font-display font-bold leading-[1.04] text-balance text-[clamp(2.6rem,6vw,4.8rem)] ${center ? "mx-auto max-w-4xl" : "max-w-4xl"}`} data-reveal>
       {title}{titleAccent && <span class="block font-normal italic text-gold-soft">{titleAccent}</span>}
     </h1>

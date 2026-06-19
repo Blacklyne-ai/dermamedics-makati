@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import PageHero from "../../components/PageHero.astro";
 import Marquee from "../../components/Marquee.astro";
 import ClosingCTA from "../../components/ClosingCTA.astro";
-import { divisions } from "../../data/treatments";
+import { divisions, divisionImage } from "../../data/treatments";
 const total = divisions.reduce((n, d) => n + d.treatments.length, 0);
 ---
 <Base
@@ -16,6 +16,7 @@ const total = divisions.reduce((n, d) => n + d.treatments.length, 0);
     title="Every treatment we offer,"
     titleAccent="clearly mapped."
     lead={`From Korean fillers to NAD+ drips - ${total} doctor-led and Korean-influenced treatments across eight divisions. Browse by what you'd like to work on.`}
+    image="/photos/skincare-closeup.jpg"
   />
 
   <section class="py-16 sm:py-24 bg-[var(--color-cream)]">
@@ -23,10 +24,12 @@ const total = divisions.reduce((n, d) => n + d.treatments.length, 0);
       {divisions.map((d) => (
         <div class="rounded-[2rem] ring-line bg-[var(--color-paper)] overflow-hidden hover:shadow-[var(--shadow-lift)] transition-all">
           <div class="grid lg:grid-cols-12">
-            <a href={`/treatments/${d.slug}`} class="lg:col-span-4 group relative mesh-magenta grain text-cream p-8 flex flex-col justify-between min-h-[200px]">
+            <a href={`/treatments/${d.slug}`} class="lg:col-span-4 group photo photo-zoom photo-scrim relative text-cream p-8 flex flex-col justify-between min-h-[220px]">
+              <img src={divisionImage(d.slug)} alt={d.name} class="absolute inset-0 z-0" loading="lazy" onerror="this.style.display='none'" />
+              <div class="absolute inset-0 z-0 mesh-magenta-deep opacity-55 mix-blend-multiply"></div>
               <div class="relative z-10 flex items-start justify-between">
                 <span class="eyebrow text-gold-soft text-[0.62rem]">{d.number} · {d.tag}</span>
-                <span class="font-display text-4xl text-gold">{d.glyph}</span>
+                <span class="font-display text-4xl text-gold-soft">{d.glyph}</span>
               </div>
               <div class="relative z-10">
                 <h2 class="font-display text-3xl font-bold">{d.name}</h2>

@@ -12,18 +12,18 @@ const { limit = 0, heading = true } = Astro.props;
 // Image slots are consent-ready placeholders: real, consented patient photos are a
 // flagged client-supply item. Honest framing, never fabricated "results".
 const picks = [
-  { div: "body-slimming", t: "korean-mesolipo", dur: "Course of 4 sessions" },
-  { div: "aesthetic-medicine", t: "korean-fillers", dur: "Single session" },
-  { div: "anti-ageing", t: "hifu-face", dur: "Results at 12 weeks" },
-  { div: "skin-brightening", t: "carbon-peel", dur: "3 sessions" },
-  { div: "acne", t: "anti-acne-package", dur: "8-week package" },
-  { div: "aesthetic-medicine", t: "jawtox", dur: "Reviewed at 4 weeks" },
-  { div: "lasers", t: "pico-laser", dur: "Course of sessions" },
-  { div: "tattoo-removal", t: "laser-tattoo-removal", dur: "Multi-session package" },
-  { div: "skin-brightening", t: "q-switch-laser", dur: "Course of sessions" },
-  { div: "anti-ageing", t: "thermage-flx", dur: "Single session" },
-  { div: "body-slimming", t: "cryolipolysis", dur: "Results over 12 weeks" },
-  { div: "iv-drips", t: "whitening-glutathione-drip", dur: "Weekly course" },
+  { div: "body-slimming", t: "korean-mesolipo", dur: "Course of 4 sessions", img: "/photos/body-slimming.jpg" },
+  { div: "aesthetic-medicine", t: "korean-fillers", dur: "Single session", img: "/photos/treatment-injectable.jpg" },
+  { div: "anti-ageing", t: "hifu-face", dur: "Results at 12 weeks", img: "/photos/skincare-closeup.jpg" },
+  { div: "skin-brightening", t: "carbon-peel", dur: "3 sessions", img: "/photos/treatment-facial.jpg" },
+  { div: "acne", t: "anti-acne-package", dur: "8-week package", img: "/photos/texture-detail.jpg" },
+  { div: "aesthetic-medicine", t: "jawtox", dur: "Reviewed at 4 weeks", img: "/photos/korean-beauty.jpg" },
+  { div: "lasers", t: "pico-laser", dur: "Course of sessions", img: "/photos/treatment-laser.jpg" },
+  { div: "tattoo-removal", t: "laser-tattoo-removal", dur: "Multi-session package", img: "/photos/tattoo-removal.jpg" },
+  { div: "skin-brightening", t: "q-switch-laser", dur: "Course of sessions", img: "/photos/hero-portrait.jpg" },
+  { div: "anti-ageing", t: "thermage-flx", dur: "Single session", img: "/photos/consultation.jpg" },
+  { div: "body-slimming", t: "cryolipolysis", dur: "Results over 12 weeks", img: "/photos/clinic-interior.jpg" },
+  { div: "iv-drips", t: "whitening-glutathione-drip", dur: "Weekly course", img: "/photos/iv-drip.jpg" },
 ];
 
 const items = picks
@@ -31,9 +31,9 @@ const items = picks
     const d = divisions.find((x) => x.slug === p.div)!;
     const t = d.treatments.find((x) => x.slug === p.t);
     if (!t) return null;
-    return { divisionSlug: d.slug, divisionName: d.name, glyph: d.glyph, name: t.name, korean: !!t.korean, dur: p.dur, slug: t.slug };
+    return { divisionSlug: d.slug, divisionName: d.name, glyph: d.glyph, name: t.name, korean: !!t.korean, dur: p.dur, slug: t.slug, img: p.img };
   })
-  .filter(Boolean) as { divisionSlug: string; divisionName: string; glyph: string; name: string; korean: boolean; dur: string; slug: string }[];
+  .filter(Boolean) as { divisionSlug: string; divisionName: string; glyph: string; name: string; korean: boolean; dur: string; slug: string; img: string }[];
 
 const shown = limit ? items.slice(0, limit) : items;
 const filters = [{ slug: "all", name: "All results" }, ...divisions.map((d) => ({ slug: d.slug, name: d.name }))]
@@ -67,28 +67,18 @@ const filters = [{ slug: "all", name: "All results" }, ...divisions.map((d) => (
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="ba-grid" data-stagger>
       {shown.map((it) => (
-        <article class="ba-card group rounded-3xl overflow-hidden ring-line bg-[var(--color-paper)] shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-lift)] transition-all" data-div={it.divisionSlug} data-tilt="3">
-          <div class="relative grid grid-cols-2 aspect-[5/3]">
-            <div class="relative flex items-end p-4" style="background:linear-gradient(135deg,#8e0456,#4a0329)">
-              <span class="text-[10px] uppercase tracking-[0.2em] text-cream/70">Before</span>
-            </div>
-            <div class="relative flex items-end justify-end p-4" style="background:linear-gradient(135deg,#ecc766,#d9a53a)">
-              <span class="text-[10px] uppercase tracking-[0.2em] text-[#4a0329]/80">After</span>
-            </div>
-            <div class="absolute inset-y-0 left-1/2 w-px bg-cream/40"></div>
-            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-cream/90 flex items-center justify-center text-[var(--color-magenta)] text-xs font-bold">↔</div>
-            <span class="absolute top-3 left-1/2 -translate-x-1/2 text-[10px] text-cream/60 bg-[#4a0329]/40 rounded-full px-2 py-0.5">photo added with consent</span>
+        <a href={`/treatments/${it.divisionSlug}/${it.slug}`} class="ba-card group card-lux photo photo-zoom photo-scrim relative block rounded-3xl overflow-hidden gold-frame aspect-[4/5]" data-div={it.divisionSlug} data-tilt="3">
+          <img src={it.img} alt={`${it.name} at DermaMedics`} class="absolute inset-0 z-0" loading="lazy" onerror="this.style.display='none'" />
+          <div class="absolute inset-0 z-0 mesh-magenta-deep opacity-50 mix-blend-multiply"></div>
+          <span class="absolute z-10 top-4 left-4 text-[10px] uppercase tracking-[0.18em] text-cream/70 bg-[var(--color-magenta-deepest)]/50 rounded-full px-2.5 py-1">with patient consent</span>
+          <span class="absolute z-10 top-4 right-4 font-display text-2xl text-gold-soft">{it.glyph}</span>
+          <div class="absolute z-10 inset-x-0 bottom-0 p-6">
+            <span class="eyebrow text-gold-soft text-[0.58rem]">{it.divisionName}{it.korean ? " · Korean" : ""}</span>
+            <h3 class="mt-1.5 font-display text-xl font-bold text-cream">{it.name}</h3>
+            <p class="mt-0.5 text-sm text-cream/75">{it.dur}</p>
+            <span class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-soft">Book this treatment <span class="transition-transform group-hover:translate-x-1">→</span></span>
           </div>
-          <div class="p-5">
-            <div class="flex items-center justify-between">
-              <span class="eyebrow text-[var(--color-gold-deep)] text-[0.62rem]">{it.divisionName}{it.korean ? " · Korean" : ""}</span>
-              <span class="font-display text-xl text-[var(--color-gold)]">{it.glyph}</span>
-            </div>
-            <h3 class="mt-1.5 font-display text-lg font-bold text-[var(--color-magenta)]">{it.name}</h3>
-            <p class="mt-1 text-sm text-[var(--color-ink-soft)]">{it.dur}</p>
-            <a href={`/treatments/${it.divisionSlug}/${it.slug}`} class="mt-3 inline-flex link-underline text-sm font-semibold text-[var(--color-magenta)]">Book this treatment →</a>
-          </div>
-        </article>
+        </a>
       ))}
     </div>
 

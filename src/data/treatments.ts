@@ -554,3 +554,19 @@ export function divisionBySlug(slug: string): Division | undefined {
 export function peso(n: number): string {
   return "₱" + n.toLocaleString("en-PH");
 }
+
+// Editorial photography per division (Pexels, license-free commercial use).
+export const divisionImages: Record<string, string> = {
+  "aesthetic-medicine": "/photos/treatment-injectable.jpg",
+  "body-slimming": "/photos/body-slimming.jpg",
+  "anti-ageing": "/photos/skincare-closeup.jpg",
+  "skin-brightening": "/photos/korean-beauty.jpg",
+  acne: "/photos/treatment-facial.jpg",
+  "iv-drips": "/photos/iv-drip.jpg",
+  lasers: "/photos/treatment-laser.jpg",
+  "tattoo-removal": "/photos/tattoo-removal.jpg",
+};
+
+export function divisionImage(slug: string): string {
+  return divisionImages[slug] ?? "/photos/skincare-closeup.jpg";
+}

@@ -1,7 +1,7 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import ClosingCTA from "../../../components/ClosingCTA.astro";
-import { divisions, peso } from "../../../data/treatments";
+import { divisions, peso, divisionImage } from "../../../data/treatments";
 import { business } from "../../../data/site";
 
 export function getStaticPaths() {
@@ -34,8 +34,8 @@ const facts = [
         <a href={`/treatments/${division.slug}`} class="hover:text-gold">{division.name}</a> <span class="text-gold">›</span>
         <span class="text-cream/90">{treatment.name}</span>
       </nav>
-      <div class="grid lg:grid-cols-12 gap-10 items-end">
-        <div class="lg:col-span-8">
+      <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7">
           <p class="eyebrow text-gold-soft" data-reveal>{treatment.korean ? "Korean technique" : division.name} · {treatment.tagline}</p>
           <h1 class="mt-5 font-display font-bold leading-[1.04] text-balance text-[clamp(2.4rem,6vw,4.6rem)]" data-reveal>{treatment.name}</h1>
           <p class="mt-6 max-w-2xl text-lg text-cream/80 text-pretty" data-reveal>{treatment.summary}</p>
@@ -44,8 +44,11 @@ const facts = [
             <a href="/book-free-consultation" class="btn btn-ghost-light">Free consultation</a>
           </div>
         </div>
-        <div class="lg:col-span-4 self-stretch">
-          <span class="font-display text-[8rem] leading-none text-gold/30 block text-right" aria-hidden="true">{division.glyph}</span>
+        <div class="lg:col-span-5" data-reveal="right">
+          <figure class="photo photo-zoom photo-tint gold-frame relative rounded-[1.75rem] aspect-[4/3] shadow-[var(--shadow-float)]">
+            <img src={divisionImage(division.slug)} alt={treatment.name} class="absolute inset-0" loading="eager" onerror="this.style.display='none'" />
+            <span class="absolute z-10 top-4 right-4 font-display text-4xl text-gold-soft">{division.glyph}</span>
+          </figure>
         </div>
       </div>
     </div>
