@@ -21,6 +21,9 @@ const reasons = [
   { n: "04", t: "Priced in plain sight", d: "Most Manila clinics hide the cost until you're in the chair. We show you the price first, every time. Transparency is the whole point." },
 ];
 const homeFaqs = faqs.filter((f) => ["Will you tell me the price before I commit?", "What does 'Korean-influenced' actually mean here?", "Are treatments done by a doctor?", "How do I book?"].includes(f.q));
+
+// Hero image — swap to the client's own shot (or a stronger candidate) here.
+const heroImage = "/photos/hero-portrait.jpg";
 ---
 <Base
   title="DermaMedics Makati - Doctor-led, Korean-influenced aesthetic medicine"
@@ -54,33 +57,34 @@ const homeFaqs = faqs.filter((f) => ["Will you tell me the price before I commit
         <div class="lg:col-span-5" data-reveal="right">
           <div class="relative">
             <!-- Editorial portrait. Swap for the client's own shot at /photos/hero-portrait.jpg. -->
-            <figure class="photo photo-zoom photo-tint gold-frame relative rounded-[2rem] aspect-[4/5] shadow-[var(--shadow-float)]">
-              <div class="absolute inset-0 mesh-magenta-deep"></div>
+            <figure class="photo photo-zoom gold-frame relative rounded-[2.25rem] overflow-hidden aspect-[4/5] bg-[var(--color-magenta-deep)] shadow-[var(--shadow-float)] ring-1 ring-white/10">
               <img
-                src="/photos/hero-portrait.jpg"
-                alt="DermaMedics patient with healthy, glowing skin"
-                class="relative z-10"
+                src={heroImage}
+                alt="A DermaMedics patient with healthy, glowing skin"
+                class="absolute inset-0 w-full h-full object-cover object-center"
                 loading="eager"
-                width="800" height="1000"
-                onerror="this.style.display='none'"
+                fetchpriority="high"
+                width="1000" height="1250"
+                onerror="this.closest('figure').classList.add('mesh-magenta-deep','grain')"
               />
+              <!-- light brand vignette: keeps the photo clearly visible, blends the edges -->
+              <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(to top, rgba(74,3,41,0.78) 0%, rgba(74,3,41,0.12) 38%, transparent 60%), linear-gradient(to left, transparent 70%, rgba(225,10,130,0.22))"></div>
+              <div class="absolute inset-x-0 bottom-0 z-10 p-6">
+                <p class="eyebrow text-gold-soft text-[0.56rem]">Free aesthetic-doctor consultation</p>
+                <p class="mt-1.5 font-display text-xl font-bold text-cream leading-snug">Know the plan and the price first.</p>
+                <a href="/book-free-consultation" class="btn btn-gold mt-3 text-sm py-2.5 px-5">Book free consultation</a>
+              </div>
             </figure>
+
             <!-- peony brand motif -->
-            <Peony class="absolute -bottom-10 -left-12 w-32 h-32 text-gold-soft/40 -z-0 hidden sm:block" />
+            <Peony class="absolute -bottom-12 -left-12 w-32 h-32 text-gold-soft/30 -z-10 hidden sm:block" />
 
             <!-- ₱99 promo badge, echoing the real Mega Sale campaign -->
-            <a href="/transparent-pricing" class="floaty absolute -top-5 -right-3 sm:-right-5 z-20 w-28 h-28 sm:w-32 sm:h-32 rounded-full flex flex-col items-center justify-center text-center shadow-[var(--shadow-gold)]" style="background:radial-gradient(circle at 35% 30%, #ecc766, #d9a53a 70%, #b8862b)">
+            <a href="/transparent-pricing" class="floaty absolute -top-6 -right-3 sm:-right-6 z-20 w-28 h-28 sm:w-36 sm:h-36 rounded-full flex flex-col items-center justify-center text-center shadow-[var(--shadow-gold)] ring-4 ring-[var(--color-magenta)]/30" style="background:radial-gradient(circle at 35% 30%, #ecc766, #d9a53a 70%, #b8862b)">
               <span class="text-[0.6rem] font-semibold uppercase tracking-wide text-[var(--color-magenta-deepest)]">As low as</span>
-              <span class="font-display text-3xl sm:text-4xl font-bold text-[var(--color-magenta)] leading-none">₱99</span>
+              <span class="font-display text-4xl sm:text-5xl font-bold text-[var(--color-magenta)] leading-none">₱99</span>
               <span class="text-[0.55rem] font-semibold uppercase tracking-wide text-[var(--color-magenta-deepest)] mt-0.5">Mega Sale</span>
             </a>
-
-            <!-- Floating consult card -->
-            <div class="glass-dark rounded-2xl p-5 shadow-[var(--shadow-float)] absolute -bottom-6 -left-3 sm:-left-6 z-20 max-w-[17rem]">
-              <p class="eyebrow text-gold-soft text-[0.58rem]">Free aesthetic-doctor consultation</p>
-              <p class="mt-2 font-display text-lg font-bold text-cream leading-snug">Know the plan and the price before anything begins.</p>
-              <a href="/book-free-consultation" class="btn btn-gold w-full mt-4 text-sm py-2.5">Book my free consultation</a>
-            </div>
           </div>
         </div>
       </div>
